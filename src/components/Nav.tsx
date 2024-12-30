@@ -33,8 +33,13 @@ const Nav = () => {
 
   return (
     <nav className="bg-black/10 h-screen flex flex-col">
-      <div className="animate-spin-slow">
+      {/* <div className="animate-spin-slow">
         <Image width={80} height={80} src={"/logo-2.png"} alt="logo" />
+      </div> */}
+      <div className="flex justify-center items-center my-4">
+        <h1 className="text-2xl font-bold">
+          SH <span className="text-accent">.</span>
+        </h1>
       </div>
       <div className="flex flex-col flex-1 justify-between relative">
         {navData.map((link, index) => {

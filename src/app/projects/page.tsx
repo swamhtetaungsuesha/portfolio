@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import Pagination from "../../components/Pagination";
 import ProjectCard from "../../components/ProjectCard";
 
@@ -63,16 +65,34 @@ export const projects = [
     tags: ["Python", "Django", "API Integration", "Data Visualization"],
   },
 ];
-
+const ITEMS_PER_PAGE = 4;
 const Project = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // This is just example data. In a real application, you might fetch this from an API
+  const totalItems = projects.length;
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentItems = projects.slice(startIndex, endIndex);
+
   return (
     <div className="flex flex-col h-full w-full">
       <div>
-        {projects.map((item, index) => (
+        {currentItems.map((item, index) => (
           <ProjectCard key={item.id} data={item} index={index + 1} />
         ))}
       </div>
-      <Pagination />
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={ITEMS_PER_PAGE}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
