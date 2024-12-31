@@ -3,6 +3,12 @@ import { BiLogoReact, BiLogoTailwindCss } from "react-icons/bi";
 import { TbBrandNextjs } from "react-icons/tb";
 import { SiAntdesign } from "react-icons/si";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+import SkillsSlider from "@/components/SkillsSlider";
+import Circles from "@/components/Circles";
+import TopLeftImg from "@/components/TopLeftImg";
+import Bulb from "@/components/Bulb";
+import Brain from "@/components/Brain";
+import Flower from "@/components/Flower";
 
 const skills = [
   {
@@ -43,8 +49,8 @@ const skills = [
 ];
 const Skills = () => {
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex flex-row justify-start  divide-x divide-white/10 w-max">
+    <div className="flex flex-col h-full items-center justify-center w-full relative">
+      {/* <div className="flex flex-row justify-start  divide-x divide-white/10 w-max">
         <div className="h-full flex flex-row gap-2 items-center justify-center w-72">
           <div className="border border-white/10 w-10 h-10 rounded-full flex items-center justify-center">
             <MdNavigateBefore />
@@ -56,7 +62,14 @@ const Skills = () => {
         {skills.map((item, index) => (
           <SkillCard key={item.id} data={item} index={index + 1} />
         ))}
-      </div>
+      </div> */}
+      <TopLeftImg />
+      {/* <BurnCircle /> */}
+      {/* <Circles /> */}
+      <Flower />
+      {/* <Bulb /> */}
+      {/* <Brain /> */}
+      <SkillsSlider />
       {/* <Pagination /> */}
     </div>
   );
