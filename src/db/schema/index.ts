@@ -1,4 +1,5 @@
 import { companies } from "./companies";
+import { credentials } from "./credentials";
 import { experiences } from "./experiences";
 import { images } from "./images";
 import { links, linkTypeEnum } from "./links";
@@ -15,6 +16,7 @@ export const schema = {
   projects,
   tags,
   experiences,
+  credentials,
   companies,
   images,
   socials,
@@ -30,3 +32,4 @@ export * from "./experiences";
 export * from "./companies";
 export * from "./images";
 export * from "./socials";
+export * from "./credentials";

@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.38.3",
     "framer-motion": "^11.15.0",
+    "jsonwebtoken": "^9.0.2",
     "next": "15.1.2",
     "pg": "^8.13.1",
     "postgres": "^3.4.5",
@@ -24,6 +26,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20",
     "@types/pg": "^8.11.10",
     "@types/react": "^19",
