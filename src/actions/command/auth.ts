@@ -62,13 +62,12 @@ export async function verifyToken(token: string) {
       .limit(1);
 
     if (!auth || !auth.isAuthenticated) {
-      return { success: false, error: "Invalid token or not authenticated" };
+      throw Error("Invalid token or not authenticated");
     }
 
     return { success: true, id: auth.id };
   } catch (error) {
-    console.error("Error verifying token:", error);
-    return { success: false, error: "Invalid token" };
+    throw error;
   }
 }
 

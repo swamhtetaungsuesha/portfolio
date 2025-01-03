@@ -2,15 +2,10 @@ import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { links } from "./links";
 import { users } from "./users";
 
-export const socials = pgTable("tags", {
+export const socials = pgTable("socials", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  linkId: integer("link_id")
-    .notNull()
-    .references(() => links.id, {
-      onUpdate: "cascade",
-      onDelete: "cascade",
-    }),
+  link: text("link").notNull(),
   userId: integer("user_id").references(() => users.id, {
     onUpdate: "cascade",
     onDelete: "cascade",
@@ -22,6 +17,4 @@ export const socials = pgTable("tags", {
 });
 
 export type SocialSelect = typeof socials.$inferSelect;
-export type SocialWithoutUser = Omit<SocialSelect, "userId" | "linkId"> & {
-  link: string;
-};
+export type SocialWithoutUser = Omit<SocialSelect, "userId">;

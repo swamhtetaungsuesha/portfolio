@@ -1,28 +1,18 @@
 import { db } from "@/db";
 import {
   companies,
-  CompanyWithImageAndLink,
+  // CompanyWithImageAndLink,
+  CompanySelect,
   experiences,
   ExperienceWithCompany,
-  images,
-  links,
 } from "@/db/schema";
 import { desc, eq, sql } from "drizzle-orm";
 
-const populateCompany = sql<CompanyWithImageAndLink>`JSONB_BUILD_OBJECT(
+const populateCompany = sql<CompanySelect>`JSONB_BUILD_OBJECT(
     'id', ${companies.id},
-    'image', JSONB_BUILD_OBJECT(
-        'id', ${images.id},
-        'name', ${images.name},
-        'uri', ${images.uri},
-        'thumbnail_uri', ${images.thumbnailUri},
-        'blur_hash', ${images.blurHash},
-        'metadata', ${images.metadata},
-        'created_at', ${images.createdAt},
-        'updated_at', ${images.updatedAt}
-    ),
+    'image', ${companies.image},
     'name', ${companies.name},
-    'uri', ${links.uri},
+    'uri', ${companies.link},
     'created_at', ${companies.createdAt},
     'updated_at', ${companies.updatedAt}
 )`;
@@ -42,9 +32,7 @@ export const getExperiences = async (): Promise<ExperienceWithCompany[]> => {
     })
     .from(experiences)
     .leftJoin(companies, eq(experiences.companyId, companies.id))
-    .leftJoin(links, eq(companies.linkId, links.id))
-    .leftJoin(images, eq(companies.imageId, images.id))
-    .groupBy(experiences.id, companies.id, images.id, links.uri)
+    .groupBy(experiences.id, companies.id)
     .orderBy(desc(experiences.startedAt));
 
   return result;

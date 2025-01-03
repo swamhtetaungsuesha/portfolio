@@ -1,6 +1,6 @@
 import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
-import { LinkWithoutUser } from "./links";
 import { SocialWithoutUser } from "./socials";
+import { sql } from "drizzle-orm";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -10,6 +10,11 @@ export const users = pgTable("users", {
   phoneNo: text("phone_no").notNull(),
   slogan: text("slogan").notNull(),
   message: text("message").notNull(),
+  aboutMeContent: text("about_me_content")
+    .array()
+    .notNull()
+    .default(sql`'{}'::text[]`),
+  resumeUrl: text("resume").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
     .notNull()
