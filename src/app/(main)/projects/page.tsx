@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import Pagination from "../../components/Pagination";
-import ProjectCard from "../../components/ProjectCard";
+import Pagination from "../../../components/Pagination";
+import ProjectCard from "../../../components/ProjectCard";
 
 export const projects = [
   {

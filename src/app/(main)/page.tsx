@@ -2,8 +2,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/variants";
-import ParticlesContainer from "../components/ParticlesContainer";
-import ProjectBtn from "../components/ProjectsBtn";
+import ParticlesContainer from "../../components/ParticlesContainer";
+import ProjectBtn from "../../components/ProjectsBtn";
 
 export default function Home() {
   return (

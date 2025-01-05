@@ -6,7 +6,6 @@ import {
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { ImageSelect } from "./images";
 
 export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),

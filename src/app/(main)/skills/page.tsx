@@ -1,4 +1,4 @@
-import SkillCard from "../../components/SkillCard";
+import SkillCard from "../../../components/SkillCard";
 import { BiLogoReact, BiLogoTailwindCss } from "react-icons/bi";
 import { TbBrandNextjs } from "react-icons/tb";
 import { SiAntdesign } from "react-icons/si";

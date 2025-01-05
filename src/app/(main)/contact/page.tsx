@@ -1,9 +1,9 @@
 import { Love_Light } from "next/font/google";
 import { fadeIn } from "@/utils/variants";
 import { motion } from "framer-motion";
-import Circles from "../../components/Circles";
-import TopLeftImg from "../../components/TopLeftImg";
-import Bulb from "../../components/Bulb";
+import Circles from "../../../components/Circles";
+import TopLeftImg from "../../../components/TopLeftImg";
+import Bulb from "../../../components/Bulb";
 const love_light = Love_Light({
   weight: "400",
   subsets: ["latin"],

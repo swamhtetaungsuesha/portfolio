@@ -17,12 +17,12 @@ import {
   SiAdobexd,
   SiAdobephotoshop,
 } from "react-icons/si";
-import ProjectsBtn from "../../components/ProjectsBtn";
+import ProjectsBtn from "../../../components/ProjectsBtn";
 import { fadeIn } from "@/utils/variants";
-import Circles from "../../components/Circles";
+import Circles from "../../../components/Circles";
 // import BurnCircle from "../../components/";
-import Bulb from "../../components/Bulb";
-import TopRightImg from "../../components/TopRightImg";
+import Bulb from "../../../components/Bulb";
+import TopRightImg from "../../../components/TopRightImg";
 
 //  data
 const aboutData = [
