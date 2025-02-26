@@ -1,4 +1,11 @@
-import { integer, pgTable, serial, timestamp } from "drizzle-orm/pg-core";
+import {
+  date,
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 import { tags, TagSelect } from "./tags";
 
 export const skills = pgTable("skills", {
@@ -9,8 +16,10 @@ export const skills = pgTable("skills", {
       onUpdate: "cascade",
       onDelete: "cascade",
     }),
-  min: integer("min").notNull(),
-  max: integer("max").notNull(),
+  category: varchar("category", { length: 255 }).notNull(),
+  startedAt: integer("started_at").notNull(),
+  // min: integer("min").notNull(),
+  // max: integer("max").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
     .notNull()

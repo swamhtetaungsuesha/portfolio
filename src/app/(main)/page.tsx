@@ -7,12 +7,12 @@ import ProjectBtn from "../../components/ProjectsBtn";
 
 export default function Home() {
   return (
-    <div className="bg-[#1B1536] h-full w-full">
+    <div className=" h-full w-full">
       <div className="w-3/5 h-full absolute right-0 bottom-0">
         <div className="bg-explosion xl:bg-cover xl:bg-right xl:bg-no-repeat w-full h-full absolute mix-blend-color-dodge translate-z-0 z-10"></div>
         <ParticlesContainer />
       </div>
-      <div className="w-full h-full bg-gradient-to-r from-primary from-10% via-black via-40% to-black/50">
+      <div className="w-full h-full bg-gradient-to-r from-black/30 from-10% via-black via-40% to-black/50">
         <div className="text-center flex flex-col justify-center xl:pt-40 xl:text-left h-full container mx-auto xl:items-start items-center">
           <h1 className="h1">
             Transforming Ideas <br /> Into{" "}

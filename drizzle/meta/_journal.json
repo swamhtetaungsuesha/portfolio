@@ -8,6 +8,69 @@
       "when": 1735233659428,
       "tag": "0000_kind_romulus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1740576469969,
+      "tag": "0001_tricky_khan",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740576706758,
+      "tag": "0002_material_demogoblin",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1740586824321,
+      "tag": "0003_nappy_bullseye",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1740587105710,
+      "tag": "0004_good_wonder_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1740587246606,
+      "tag": "0005_bitter_spyke",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1740587335611,
+      "tag": "0006_ancient_randall",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1740587433870,
+      "tag": "0007_bright_reavers",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1740588264603,
+      "tag": "0008_warm_lockheed",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1740588356787,
+      "tag": "0009_illegal_medusa",
+      "breakpoints": true
     }
   ]
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, FieldValues, DefaultValues } from "react-hook-form";
+import { useForm, FieldValues, DefaultValues, Path } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,8 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import ImageUpload from "./image-upload";
+import { ResponseData } from "@/services/ApiResponse";
+import { toast } from "sonner";
 
 interface GenericFormProps<T extends FieldValues> {
   schema: z.ZodType<T>;
@@ -72,7 +74,8 @@ export function GenericForm<T extends FieldValues>({
     try {
       await onSubmit(values);
     } catch (err) {
-      setError("An unexpected error occurred");
+      const error = err as Error;
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +88,7 @@ export function GenericForm<T extends FieldValues>({
           <FormField
             key={field.name as string}
             control={form.control}
-            name={field.name as string}
+            name={field.name as Path<T>}
             render={({ field: formField }) => (
               <FormItem>
                 <FormLabel>{field.label}</FormLabel>
@@ -141,7 +144,12 @@ export function GenericForm<T extends FieldValues>({
             )}
           />
         ))}
-        <Button type="submit" disabled={isLoading}>
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="w-full"
+          onClick={() => console.log("....")}
+        >
           {isLoading ? "Submitting..." : submitButtonText}
         </Button>
         {error && (

@@ -3,5 +3,9 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className="bg-primary h-screen w-full">{children}</main>;
+  return (
+    <main className="page bg-site text-white bg-cover bg-no-repeat font-sora relative w-full">
+      {children}
+    </main>
+  );
 }

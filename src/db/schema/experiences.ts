@@ -6,6 +6,7 @@ import {
   serial,
   text,
   timestamp,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { companies, CompanySelect } from "./companies";
 
@@ -17,7 +18,7 @@ export const experiences = pgTable("experiences", {
       onUpdate: "cascade",
       onDelete: "restrict",
     }),
-  position: text("position").notNull(),
+  position: varchar("position", { length: 255 }).notNull(),
   description: text("description").array().notNull(),
   startedAt: date("started_at").notNull(),
   endedAt: date("ended_at").defaultNow(),

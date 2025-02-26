@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "@/db"; // Assume this is your database connection
 import { credentials } from "@/db/schema";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 // In a real application, this should be an environment variable

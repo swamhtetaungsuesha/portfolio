@@ -1,10 +1,16 @@
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 import { users } from "./users";
 
 export const socials = pgTable("socials", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  link: text("link").notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  link: varchar("link", { length: 255 }).notNull(),
   userId: integer("user_id").references(() => users.id, {
     onUpdate: "cascade",
     onDelete: "cascade",

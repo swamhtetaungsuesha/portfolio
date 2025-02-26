@@ -59,15 +59,15 @@ export default function ImageUpload({
   return (
     <div className="w-full max-w-md mx-auto">
       {!file ? (
-        <label className="flex flex-col items-center justify-center w-full py-6 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+        <label className="flex flex-col items-center justify-center w-full py-6 border border-input rounded-lg cursor-pointer bg-muted/50 hover:bg-muted/20">
           <div className="text-center">
             <div className="border p-2 rounded-md max-w-min mx-auto">
               <UploadCloud size={20} />
             </div>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-muted-foreground">
               <span className="font-semibold">Click to select an image</span>
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-muted-foreground">
               (Image should be under {maxSizeMB}MB)
             </p>
           </div>
