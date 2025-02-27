@@ -11,4 +11,7 @@ export const companies = pgTable("companies", {
     .$onUpdate(() => new Date()),
 });
 
-export type CompanySelect = typeof companies.$inferSelect;
+export type CompanySelect = Omit<
+  typeof companies.$inferSelect,
+  "createdAt" | "updatedAt"
+>;

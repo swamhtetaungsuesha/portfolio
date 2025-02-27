@@ -17,15 +17,18 @@ export const projects = pgTable("projects", {
   githubUrl: varchar("github_url", { length: 255 }).notNull(),
   thumbnailImage: varchar("thumbnail_image", { length: 255 }),
   isActive: boolean("is_active").notNull().default(true),
-  startedAt: integer("started_at").notNull(),
-  endedAt: integer("ended_at"),
+  startedAt: varchar("started_at", { length: 6 }).notNull(),
+  endedAt: varchar("ended_at", { length: 6 }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
     .notNull()
     .$onUpdate(() => new Date()),
 });
 
-export type ProjectSelect = typeof projects.$inferSelect;
+export type ProjectSelect = Omit<
+  typeof projects.$inferSelect,
+  "createdAt" | "updatedAt"
+>;
 export type ProjectWithTags = ProjectSelect & {
   tags: string[];
 };

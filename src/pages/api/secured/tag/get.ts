@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { tags, TagSelect } from "@/db/schema";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
+import { getTableColumns } from "drizzle-orm";
 
 export default async function handler(
   req: ExtendedNextApiRequest<{}>,
@@ -9,7 +10,8 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      const result = await db.select().from(tags);
+      const { createdAt, updatedAt, ...rest } = getTableColumns(tags);
+      const result = await db.select({ ...rest }).from(tags);
       res.status(200).json({
         success: true,
         message: "Success",

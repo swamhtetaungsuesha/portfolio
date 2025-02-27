@@ -1,15 +1,24 @@
 import { db } from "@/db";
-import { skills, SkillSelect } from "@/db/schema";
+import { skills, SkillSelect, SkillWithTag, tags } from "@/db/schema";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
+import { eq, sql } from "drizzle-orm";
 
 export default async function handler(
   req: ExtendedNextApiRequest<{}>,
-  res: ExtendedNextApiReponse<SkillSelect[]>
+  res: ExtendedNextApiReponse<SkillWithTag[]>
 ) {
   if (req.method === "GET") {
     try {
-      const result = await db.select().from(skills);
+      const result = await db
+        .select({
+          id: skills.id,
+          category: skills.category,
+          startedAt: skills.startedAt,
+          tag: sql<string>`${tags.name}`.as("tag"),
+        })
+        .from(skills)
+        .leftJoin(tags, eq(skills.tagId, tags.id));
       res.status(200).json({
         success: true,
         message: "Success",

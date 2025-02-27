@@ -2,7 +2,7 @@ import { ProjectSelect, ProjectWithTags } from "@/db/schema";
 import { ResponseData } from "../ApiResponse";
 import ApiService from "../ApiService";
 import { APIServiceError } from "../ApiServiceError";
-import { ProjectDataWithoutId } from "./Project";
+import { ProjectData, ProjectDataWithoutId } from "./Project";
 
 class ProjectService {
   async getList(): Promise<ResponseData<ProjectWithTags[]>> {
@@ -40,9 +40,9 @@ class ProjectService {
       };
     }
   }
-  async update(payload: ProjectSelect): Promise<ResponseData<ProjectSelect>> {
+  async update(payload: ProjectData): Promise<ResponseData<ProjectWithTags>> {
     try {
-      const response: ResponseData<ProjectSelect> = await ApiService.call(
+      const response: ResponseData<ProjectWithTags> = await ApiService.call(
         "/api/secured/project/update",
         "POST",
         payload
@@ -59,7 +59,7 @@ class ProjectService {
     }
   }
 
-  async delete(payload: { id: string }): Promise<ResponseData<ProjectSelect>> {
+  async delete(payload: { id: number }): Promise<ResponseData<ProjectSelect>> {
     try {
       const response: ResponseData<ProjectSelect> = await ApiService.call(
         "/api/secured/project/delete",

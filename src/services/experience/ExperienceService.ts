@@ -2,6 +2,7 @@ import { ExperienceSelect, ExperienceWithCompany } from "@/db/schema";
 import { ResponseData } from "../ApiResponse";
 import ApiService from "../ApiService";
 import { APIServiceError } from "../ApiServiceError";
+import { ExperienceData, ExperienceDataWithoutId } from "./Experience";
 
 class ExperienceService {
   async getList(): Promise<ResponseData<ExperienceWithCompany[]>> {
@@ -20,7 +21,7 @@ class ExperienceService {
   }
 
   async create(
-    payload: ExperienceSelect
+    payload: ExperienceDataWithoutId
   ): Promise<ResponseData<ExperienceSelect>> {
     try {
       const response: ResponseData<ExperienceSelect> = await ApiService.call(
@@ -40,7 +41,7 @@ class ExperienceService {
     }
   }
   async update(
-    payload: ExperienceSelect
+    payload: ExperienceData
   ): Promise<ResponseData<ExperienceSelect>> {
     try {
       const response: ResponseData<ExperienceSelect> = await ApiService.call(
@@ -61,7 +62,7 @@ class ExperienceService {
   }
 
   async delete(payload: {
-    id: string;
+    id: number;
   }): Promise<ResponseData<ExperienceSelect>> {
     try {
       const response: ResponseData<ExperienceSelect> = await ApiService.call(

@@ -23,8 +23,6 @@ export default async function handler(
           isActive: projects.isActive,
           startedAt: projects.startedAt,
           endedAt: projects.endedAt,
-          createdAt: projects.createdAt,
-          updatedAt: projects.updatedAt,
         })
         .from(projects)
         .leftJoin(projectTags, eq(projectTags.projectId, projects.id))

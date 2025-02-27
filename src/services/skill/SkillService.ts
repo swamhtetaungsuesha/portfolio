@@ -1,13 +1,13 @@
-import { CompanySelect, SkillSelect } from "@/db/schema";
+import { CompanySelect, SkillSelect, SkillWithTag } from "@/db/schema";
 import { ResponseData } from "../ApiResponse";
 import ApiService from "../ApiService";
 import { APIServiceError } from "../ApiServiceError";
 import { SkillDataWithoutId } from "./Skill";
 
 class SkillService {
-  async getList(): Promise<ResponseData<SkillSelect[]>> {
+  async getList(): Promise<ResponseData<SkillWithTag[]>> {
     try {
-      const res: ResponseData<SkillSelect[]> = await ApiService.call(
+      const res: ResponseData<SkillWithTag[]> = await ApiService.call(
         "/api/secured/skill/get",
         "GET"
       );
@@ -22,9 +22,9 @@ class SkillService {
 
   async create(
     payload: SkillDataWithoutId
-  ): Promise<ResponseData<SkillSelect>> {
+  ): Promise<ResponseData<SkillWithTag>> {
     try {
-      const response: ResponseData<SkillSelect> = await ApiService.call(
+      const response: ResponseData<SkillWithTag> = await ApiService.call(
         "/api/secured/skill/create",
         "POST",
         payload
@@ -40,9 +40,9 @@ class SkillService {
       };
     }
   }
-  async update(payload: CompanySelect): Promise<ResponseData<null>> {
+  async update(payload: SkillWithTag): Promise<ResponseData<SkillWithTag>> {
     try {
-      const response: ResponseData<null> = await ApiService.call(
+      const response: ResponseData<SkillWithTag> = await ApiService.call(
         "/api/secured/skill/update",
         "POST",
         payload
@@ -59,7 +59,7 @@ class SkillService {
     }
   }
 
-  async delete(payload: { id: string }): Promise<ResponseData<SkillSelect>> {
+  async delete(payload: { id: number }): Promise<ResponseData<SkillSelect>> {
     try {
       const response: ResponseData<SkillSelect> = await ApiService.call(
         "/api/secured/skill/delete",

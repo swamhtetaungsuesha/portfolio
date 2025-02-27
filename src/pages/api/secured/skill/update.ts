@@ -1,35 +1,59 @@
 import { db } from "@/db";
-import { skills, SkillSelect } from "@/db/schema";
+import { skills, SkillSelect, SkillWithTag, tags } from "@/db/schema";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
 import { eq } from "drizzle-orm";
 
 export default async function handler(
-  req: ExtendedNextApiRequest<SkillSelect>,
-  res: ExtendedNextApiReponse<SkillSelect>
+  req: ExtendedNextApiRequest<SkillWithTag>,
+  res: ExtendedNextApiReponse<SkillWithTag>
 ) {
   if (req.method === "POST") {
     try {
       const skillData = req.body;
+      const { tag: tagName, ...skillDetail } = skillData;
+      const updatedSkill = await db.transaction(async (tx) => {
+        const tag = await (async () => {
+          const [existingTag] = await tx
+            .select()
+            .from(tags)
+            .where(eq(tags.name, tagName));
 
-      const result = await db
-        .update(skills)
-        .set({
-          ...skillData,
-          updatedAt: new Date(),
-        })
-        .where(eq(skills.id, skillData.id))
-        .returning();
+          if (existingTag) {
+            return existingTag;
+          } else {
+            const [newTag] = await tx
+              .insert(tags)
+              .values({ name: tagName, term: tagName.toLowerCase() })
+              .returning();
+
+            return newTag;
+          }
+        })();
+
+        const [insertedSkill] = await tx
+          .update(skills)
+          .set({
+            tagId: tag.id,
+            ...skillDetail,
+            updatedAt: new Date(),
+          })
+          .where(eq(skills.id, skillData.id))
+          .returning();
+
+        return { ...insertedSkill, tag: tag.name };
+      });
+
       res.status(200).json({
         success: true,
         message: "You are updated a skill successfully!",
-        data: result[0],
+        data: updatedSkill,
       });
     } catch (error) {
-      console.error("Insert Company Error:", error);
+      console.error("Updated Company Error:", error);
       res
         .status(500)
-        .json({ success: false, message: "Failed to insert skill" });
+        .json({ success: false, message: "Failed to update skill" });
     }
   } else {
     res.status(405).json({ success: false, message: "Method not allowed" });

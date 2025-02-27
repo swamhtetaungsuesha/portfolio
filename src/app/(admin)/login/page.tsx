@@ -28,7 +28,7 @@ const Login = () => {
       toast("Success", {
         description: res.message,
       });
-      router.push("/dashboard");
+      router.push("/dashboard/company");
     } else {
       toast("Error", {
         description: res.message,

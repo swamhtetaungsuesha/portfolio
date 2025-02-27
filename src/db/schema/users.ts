@@ -21,7 +21,10 @@ export const users = pgTable("users", {
     .$onUpdate(() => new Date()),
 });
 
-export type UserSelect = typeof users.$inferSelect;
+export type UserSelect = Omit<
+  typeof users.$inferSelect,
+  "updatedAt" | "createdAt"
+>;
 export type UserWithLinks = UserSelect & {
   socials: SocialWithoutUser[];
 };

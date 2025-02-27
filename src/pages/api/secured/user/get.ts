@@ -8,8 +8,6 @@ JSONB_BUILD_OBJECT(
     'id', ${socials.id},
     'name', ${socials.name},
     'link', ${socials.link},
-    'created_at', ${socials.createdAt},
-    'updated_at', ${socials.updatedAt}
   ),
 )`;
 
@@ -31,8 +29,6 @@ export default async function handler(
           resumeUrl: users.resumeUrl,
           aboutMeContent: users.aboutMeContent,
           socials: populateSocials.as("socials"),
-          createdAt: users.createdAt,
-          updatedAt: users.updatedAt,
         })
         .from(users)
         .leftJoin(socials, eq(socials.userId, users.id))

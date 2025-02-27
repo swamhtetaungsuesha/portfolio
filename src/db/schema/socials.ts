@@ -21,5 +21,8 @@ export const socials = pgTable("socials", {
     .$onUpdate(() => new Date()),
 });
 
-export type SocialSelect = typeof socials.$inferSelect;
+export type SocialSelect = Omit<
+  typeof socials.$inferSelect,
+  "createdAt" | "updatedAt"
+>;
 export type SocialWithoutUser = Omit<SocialSelect, "userId">;

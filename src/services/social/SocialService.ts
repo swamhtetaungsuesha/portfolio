@@ -1,4 +1,4 @@
-import { SkillSelect, SocialSelect } from "@/db/schema";
+import { SkillSelect, SocialSelect, SocialWithoutUser } from "@/db/schema";
 import { ResponseData } from "../ApiResponse";
 import ApiService from "../ApiService";
 import { APIServiceError } from "../ApiServiceError";
@@ -40,7 +40,9 @@ class SocialService {
       };
     }
   }
-  async update(payload: SocialSelect): Promise<ResponseData<SocialSelect>> {
+  async update(
+    payload: SocialWithoutUser
+  ): Promise<ResponseData<SocialSelect>> {
     try {
       const response: ResponseData<SocialSelect> = await ApiService.call(
         "/api/secured/social/update",

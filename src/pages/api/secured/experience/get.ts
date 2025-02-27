@@ -13,8 +13,6 @@ const populateCompany = sql<CompanySelect>`JSONB_BUILD_OBJECT(
     'image', ${companies.image},
     'name', ${companies.name},
     'uri', ${companies.link},
-    'created_at', ${companies.createdAt},
-    'updated_at', ${companies.updatedAt}
 )`;
 
 export default async function handler(
@@ -32,8 +30,6 @@ export default async function handler(
           startedAt: experiences.startedAt,
           endedAt: experiences.endedAt,
           isActive: experiences.isActive,
-          createdAt: experiences.createdAt,
-          updatedAt: experiences.updatedAt,
         })
         .from(experiences)
         .leftJoin(companies, eq(experiences.companyId, companies.id))

@@ -10,4 +10,7 @@ export const tags = pgTable("tags", {
     .$onUpdate(() => new Date()),
 });
 
-export type TagSelect = typeof tags.$inferSelect;
+export type TagSelect = Omit<
+  typeof tags.$inferSelect,
+  "createdAt" | "updatedAt"
+>;

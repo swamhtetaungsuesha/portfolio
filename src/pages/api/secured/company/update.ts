@@ -11,11 +11,10 @@ export default async function handler(
   if (req.method === "POST") {
     try {
       const companyData = req.body;
-      const { createdAt, ...rest } = companyData;
       const result = await db
         .update(companies)
         .set({
-          ...rest,
+          ...companyData,
           updatedAt: new Date(),
         })
         .where(eq(companies.id, companyData.id))

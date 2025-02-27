@@ -29,7 +29,10 @@ export const experiences = pgTable("experiences", {
     .$onUpdate(() => new Date()),
 });
 
-export type ExperienceSelect = typeof experiences.$inferSelect;
+export type ExperienceSelect = Omit<
+  typeof experiences.$inferSelect,
+  "updatedAt" | "createdAt"
+>;
 export type ExperienceWithCompany = Omit<ExperienceSelect, "companyId"> & {
   company: CompanySelect;
 };
