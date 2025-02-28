@@ -148,6 +148,7 @@ export default function ExperienceForm({
                 <Textarea
                   placeholder="Enter your experience description. Add each item on new line."
                   className="resize-none"
+                  rows={8}
                   value={field.value.join("\n")}
                   onChange={(e) => field.onChange(e.target.value.split("\n"))}
                 />

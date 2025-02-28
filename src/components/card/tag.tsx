@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -42,32 +43,32 @@ const TagCard: React.FC<TagDataCardProps> = ({ tag }) => {
     <Card>
       <CardHeader>
         <CardTitle>{tag.name}</CardTitle>
+        <CardDescription>{tag.term}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <p>
-          <strong>Term:</strong> {tag.term}
-        </p>
-        <div className="mt-4 flex justify-end gap-2">
+      <CardFooter>
+        <div className="flex justify-between w-full gap-2">
           <Button
             variant="destructive"
-            size="sm"
+            className="w-full"
             onClick={() => onDelete(tag.id)}
           >
             Delete
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline">Update</Button>
+              <Button variant="outline" className="w-full">
+                Update
+              </Button>
             </DialogTrigger>
             <DialogContent className="w-[450px]">
               <DialogHeader>
-                <DialogTitle>Update Company</DialogTitle>
+                <DialogTitle>Update Tag</DialogTitle>
               </DialogHeader>
               <TagForm defaultValues={tag} />
             </DialogContent>
           </Dialog>
         </div>
-      </CardContent>
+      </CardFooter>
     </Card>
   );
 };

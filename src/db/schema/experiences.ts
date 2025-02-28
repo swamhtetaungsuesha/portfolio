@@ -20,8 +20,8 @@ export const experiences = pgTable("experiences", {
     }),
   position: varchar("position", { length: 255 }).notNull(),
   description: text("description").array().notNull(),
-  startedAt: date("started_at").notNull(),
-  endedAt: date("ended_at").defaultNow(),
+  startedAt: varchar("started_at", { length: 6 }).notNull(),
+  endedAt: varchar("ended_at", { length: 6 }),
   isActive: boolean("is_active").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")

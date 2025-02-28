@@ -13,6 +13,15 @@ import {
 import CompanyForm from "../form/company";
 import CompanyService from "@/services/company/CompanyService";
 import { toast } from "sonner";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { Eye } from "lucide-react";
+import Link from "next/link";
 
 interface CompanyCardProps {
   company: CompanySelect;
@@ -32,49 +41,50 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
     }
   };
   return (
-    <div
-      key={company.id}
-      className="border p-4 rounded-lg flex items-center justify-between"
-    >
-      <div className="flex items-center space-x-4">
+    <Card key={company.id} className="bg-transparent">
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>{company.name}</CardTitle>
+        <Link href={company.link}>
+          <Button variant={"outline"} size={"icon"}>
+            <Eye />
+          </Button>
+        </Link>
+      </CardHeader>
+      <CardContent>
         {company.image && (
           <img
             src={company.image}
             alt={`${company.name}-logo`}
-            width={60}
-            height={60}
+            width="100%"
             className="rounded-sm"
           />
         )}
-        <div>
-          <h3 className="text-lg font-semibold">{company.name}</h3>
-          <a
-            href={company.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
+      </CardContent>
+      <CardFooter>
+        <div className="flex flex-row gap-2 w-full">
+          <Dialog>
+            <DialogTrigger asChild className="w-full">
+              <Button variant="outline" className="w-full">
+                Edit
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Edit Company</DialogTitle>
+              </DialogHeader>
+              <CompanyForm defaultValues={company} />
+            </DialogContent>
+          </Dialog>
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={() => onDelete(company.id)}
           >
-            {company.link}
-          </a>
+            Delete
+          </Button>
         </div>
-      </div>
-      <div className="space-x-2">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline">Edit</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Edit Company</DialogTitle>
-            </DialogHeader>
-            <CompanyForm defaultValues={company} />
-          </DialogContent>
-        </Dialog>
-        <Button variant="destructive" onClick={() => onDelete(company.id)}>
-          Delete
-        </Button>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 

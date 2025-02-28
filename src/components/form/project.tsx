@@ -69,24 +69,49 @@ export default function ProjectForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter your project name"
-                  type="text"
-                  {...field}
-                />
-              </FormControl>
+        <div className="grid grid-cols-12 gap-4">
+          <div className="col-span-6">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your project name"
+                      type="text"
+                      {...field}
+                    />
+                  </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="col-span-6">
+            <FormField
+              control={form.control}
+              name="thumbnailImage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Thumbnail Image</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="https://example.png"
+                      type="text"
+                      value={field.value || undefined}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
 
         <FormField
           control={form.control}
@@ -98,6 +123,7 @@ export default function ProjectForm({
                 <Textarea
                   placeholder="Enter your project description"
                   className="resize-none"
+                  rows={3}
                   {...field}
                 />
               </FormControl>
@@ -152,25 +178,6 @@ export default function ProjectForm({
           </div>
         </div>
 
-        <FormField
-          control={form.control}
-          name="thumbnailImage"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Thumbnail Image</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="https://example.png"
-                  type="text"
-                  value={field.value || undefined}
-                  onChange={field.onChange}
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           control={form.control}
           name="isActive"

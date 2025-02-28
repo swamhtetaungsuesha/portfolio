@@ -150,6 +150,7 @@ export default function UserForm({
                 <Textarea
                   placeholder="Enter your message"
                   className="resize-none"
+                  rows={8}
                   {...field}
                 />
               </FormControl>
@@ -169,6 +170,7 @@ export default function UserForm({
                   placeholder="Enter your about me content. Add each item on new line."
                   className="resize-none"
                   value={field.value.join("\n")}
+                  rows={8}
                   onChange={(e) => field.onChange(e.target.value.split("\n"))}
                 />
               </FormControl>

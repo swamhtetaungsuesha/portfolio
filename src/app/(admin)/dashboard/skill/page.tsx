@@ -38,9 +38,11 @@ const Skill = async () => {
           </DialogContent>
         </Dialog>
       </div>
-      {result.map((skill) => (
-        <SkillCard skill={skill} key={skill.id} />
-      ))}
+      <div className="grid grid-cols-5">
+        {result.map((skill) => (
+          <SkillCard skill={skill} key={skill.id} />
+        ))}
+      </div>
     </div>
   );
 };

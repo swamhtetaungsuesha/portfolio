@@ -13,6 +13,20 @@ import {
 import ProjectForm from "../form/project";
 import ProjectService from "@/services/project/ProjectService";
 import { toast } from "sonner";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { formatDateString } from "@/utils/format";
+import { Badge } from "../ui/badge";
+import { LinkIcon } from "lucide-react";
+import { TbBrandGithub } from "react-icons/tb";
+import { FaGithub, FaGithubSquare } from "react-icons/fa";
+import Link from "next/link";
 
 interface ProjectDataCardProps {
   project: ProjectWithTags;
@@ -32,74 +46,67 @@ const ProjectCard: React.FC<ProjectDataCardProps> = ({ project }) => {
     }
   };
   return (
-    <div className="border rounded-lg p-4 shadow-sm">
-      <h3 className="text-lg font-semibold">{project.name}</h3>
-      <p className="text-sm text-muted-foreground">{project.description}</p>
-      <div className="mt-2">
-        <p>
-          <strong>Live URL:</strong>{" "}
-          {project.liveUrl ? (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 underline"
-            >
-              {project.liveUrl}
-            </a>
-          ) : (
-            "N/A"
+    <Card>
+      <CardHeader>
+        <CardTitle>{project.name}</CardTitle>
+        <CardDescription>{project.description}</CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-2">
+        <div className="flex gap-2">
+          {project.liveUrl && (
+            <Link href={project.liveUrl}>
+              <Button variant={"outline"} size={"icon"}>
+                <LinkIcon />
+              </Button>
+            </Link>
           )}
-        </p>
-        <p>
-          <strong>GitHub URL:</strong>{" "}
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 underline"
-          >
-            {project.githubUrl}
-          </a>
-        </p>
-        <p>
-          <strong>Started:</strong> {project.startedAt}
-        </p>
-        {project.endedAt && (
-          <p>
-            <strong>Ended:</strong> {project.endedAt}
+          <Link href={project.githubUrl}>
+            <Button variant={"outline"} size={"icon"}>
+              <FaGithubSquare />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <p className="text-sm">
+            {formatDateString(project.startedAt)} -{" "}
+            {project.endedAt ? formatDateString(project.endedAt) : "Still"}
           </p>
-        )}
-        <p>
-          <strong>Active:</strong> {project.isActive ? "Yes" : "No"}
-        </p>
-      </div>
-      <div className="mt-2">
-        <p>
-          <strong>Tags:</strong> {project.tags.join(", ")}
-        </p>
-      </div>
-      <div className="mt-4 flex justify-end gap-2">
-        <Button
-          variant="destructive"
-          size="sm"
-          onClick={() => onDelete(project.id)}
-        >
-          Delete
-        </Button>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline">Update</Button>
-          </DialogTrigger>
-          <DialogContent className="w-[650px]">
-            <DialogHeader>
-              <DialogTitle>Update Company</DialogTitle>
-            </DialogHeader>
-            <ProjectForm defaultValues={project} />
-          </DialogContent>
-        </Dialog>
-      </div>
-    </div>
+          <Badge variant={"outline"}>
+            {project.isActive ? "Active" : "Inactive"}
+          </Badge>
+        </div>
+        <div className="mt-2 flex gap-2">
+          {project.tags.map((tag) => (
+            <Badge key={tag}>{tag}</Badge>
+          ))}
+        </div>
+      </CardContent>
+      <CardFooter>
+        <div className="flex gap-2 w-full">
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={() => onDelete(project.id)}
+          >
+            Delete
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="w-full">
+                Update
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="w-[650px]">
+              <DialogHeader>
+                <DialogTitle>Update Company</DialogTitle>
+              </DialogHeader>
+              <ProjectForm defaultValues={project} />
+            </DialogContent>
+          </Dialog>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 

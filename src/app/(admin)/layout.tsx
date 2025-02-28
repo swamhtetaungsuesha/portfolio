@@ -4,7 +4,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="page bg-site text-white bg-cover bg-no-repeat font-sora relative w-full overflow-y-auto">
+    <main className="page text-white bg-cover bg-no-repeat font-sora relative w-full overflow-y-auto">
       {children}
     </main>
   );

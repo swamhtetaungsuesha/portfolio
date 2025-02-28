@@ -29,9 +29,11 @@ export default async function Page() {
           </DialogContent>
         </Dialog>
       </div>
-      {result.map((company) => (
-        <CompanyCard company={company} key={company.id} />
-      ))}
+      <div className="grid grid-cols-4">
+        {result.map((company) => (
+          <CompanyCard company={company} key={company.id} />
+        ))}
+      </div>
       {/* <Suspense fallback={<div>Loading companies...</div>}> */}
       {/* </Suspense> */}
     </div>

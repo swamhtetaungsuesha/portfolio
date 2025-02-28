@@ -78,6 +78,13 @@
       "when": 1740653743128,
       "tag": "0010_classy_blindfold",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1740719758480,
+      "tag": "0011_red_warbird",
+      "breakpoints": true
     }
   ]
 }

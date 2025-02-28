@@ -14,6 +14,16 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import ExperienceForm from "../form/experience";
+import { formatDateString } from "@/utils/format";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { Badge } from "../ui/badge";
 
 interface ExperienceDataCardProps {
   experience: ExperienceWithCompany;
@@ -37,53 +47,59 @@ const ExperienceCard: React.FC<ExperienceDataCardProps> = ({
     }
   };
   return (
-    <div className="border rounded-lg p-4 shadow-sm">
-      <h3 className="text-lg font-semibold">{experience.position}</h3>
-      <p className="text-sm text-muted-foreground">{experience.company.name}</p>
-      <div className="mt-2">
-        <p>
-          <strong>Started:</strong> {format(experience.startedAt, "MMMM yyyy")}
-        </p>
-        {experience.endedAt && (
-          <p>
-            <strong>Ended:</strong> {format(experience.endedAt, "MMMM yyyy")}
+    <Card>
+      <CardHeader>
+        <CardTitle>{experience.position}</CardTitle>
+        <CardDescription>{experience.company.name}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-center justify-between">
+          <p className="text-sm">
+            {formatDateString(experience.startedAt)} -{" "}
+            {experience.endedAt
+              ? formatDateString(experience.endedAt)
+              : "Still"}
           </p>
-        )}
-        <p>
-          <strong>Active:</strong> {experience.isActive ? "Yes" : "No"}
-        </p>
-      </div>
-      <div className="mt-2">
-        <p>
-          <strong>Description:</strong>
-        </p>
-        <ul className="list-disc list-inside">
+          <Badge variant={"outline"}>
+            {experience.isActive ? "Active" : "Inactive"}
+          </Badge>
+        </div>
+        <div className="mt-2">
           {experience.description.map((item, index) => (
-            <li key={index}>{item}</li>
+            <p key={index} className="text-sm">
+              {item}
+            </p>
           ))}
-        </ul>
-      </div>
-      <div className="mt-4 flex justify-end gap-2">
-        <Button
-          variant="destructive"
-          size="sm"
-          onClick={() => onDelete(experience.id)}
-        >
-          Delete
-        </Button>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline">Update</Button>
-          </DialogTrigger>
-          <DialogContent className="w-[450px]">
-            <DialogHeader>
-              <DialogTitle>Update Experience</DialogTitle>
-            </DialogHeader>
-            <ExperienceForm defaultValues={experience} companies={companies} />
-          </DialogContent>
-        </Dialog>
-      </div>
-    </div>
+        </div>
+      </CardContent>
+      <CardFooter>
+        <div className="flex flex-row gap-2 w-full">
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={() => onDelete(experience.id)}
+          >
+            Delete
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="w-full">
+                Update
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="w-[450px]">
+              <DialogHeader>
+                <DialogTitle>Update Experience</DialogTitle>
+              </DialogHeader>
+              <ExperienceForm
+                defaultValues={experience}
+                companies={companies}
+              />
+            </DialogContent>
+          </Dialog>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 

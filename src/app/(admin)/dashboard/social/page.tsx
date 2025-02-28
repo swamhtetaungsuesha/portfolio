@@ -29,9 +29,11 @@ const Social = async () => {
           </DialogContent>
         </Dialog>
       </div>
-      {result.map((social) => (
-        <SocialCard social={social} key={social.id} />
-      ))}
+      <div className="grid grid-cols-5">
+        {result.map((social) => (
+          <SocialCard social={social} key={social.id} />
+        ))}
+      </div>
       {/* <Suspense fallback={<div>Loading companies...</div>}> */}
       {/* </Suspense> */}
     </div>

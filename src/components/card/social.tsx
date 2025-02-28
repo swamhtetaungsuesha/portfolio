@@ -13,6 +13,9 @@ import {
 import SocialForm from "../form/social";
 import SocialService from "@/services/social/SocialService";
 import { toast } from "sonner";
+import Link from "next/link";
+import { LinkIcon } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 interface SocialDataCardProps {
   social: SocialSelect;
@@ -32,40 +35,41 @@ const SocialCard: React.FC<SocialDataCardProps> = ({ social }) => {
     }
   };
   return (
-    <div className="border rounded-lg p-4 shadow-sm">
-      <h3 className="text-lg font-semibold">{social.name}</h3>
-      <p>
-        <strong>Link:</strong>{" "}
-        <a
-          href={social.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 underline"
-        >
-          {social.link}
-        </a>
-      </p>
-      <div className="mt-4 flex justify-end gap-2">
-        <Button
-          variant="destructive"
-          size="sm"
-          onClick={() => onDelete(social.id)}
-        >
-          Delete
-        </Button>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline">Update</Button>
-          </DialogTrigger>
-          <DialogContent className="w-[450px]">
-            <DialogHeader>
-              <DialogTitle>Update Company</DialogTitle>
-            </DialogHeader>
-            <SocialForm defaultValues={social} />
-          </DialogContent>
-        </Dialog>
-      </div>
-    </div>
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>{social.name}</CardTitle>
+
+        <Link href={social.link} target="_blank">
+          <Button variant={"link"}>
+            <LinkIcon />
+          </Button>
+        </Link>
+      </CardHeader>
+      <CardContent>
+        <div className="flex w-full gap-2">
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={() => onDelete(social.id)}
+          >
+            Delete
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="w-full">
+                Update
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="w-[450px]">
+              <DialogHeader>
+                <DialogTitle>Update Company</DialogTitle>
+              </DialogHeader>
+              <SocialForm defaultValues={social} />
+            </DialogContent>
+          </Dialog>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

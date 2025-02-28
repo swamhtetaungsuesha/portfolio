@@ -49,13 +49,15 @@ const Experience = async () => {
           </DialogContent>
         </Dialog>
       </div>
-      {result.map((experience) => (
-        <ExperienceCard
-          experience={experience}
-          companies={companiesResult}
-          key={experience.id}
-        />
-      ))}
+      <div className="grid grid-cols-3">
+        {result.map((experience) => (
+          <ExperienceCard
+            experience={experience}
+            companies={companiesResult}
+            key={experience.id}
+          />
+        ))}
+      </div>
     </div>
   );
 };

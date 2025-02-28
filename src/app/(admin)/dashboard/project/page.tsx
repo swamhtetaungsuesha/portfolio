@@ -32,7 +32,6 @@ const Project = async () => {
     .leftJoin(tags, eq(tags.id, projectTags.tagId))
     .groupBy(projects.id)
     .orderBy(desc(projects.startedAt));
-  console.log(result);
   return (
     <div>
       <div className="flex justify-end items-center mb-4">
@@ -49,9 +48,11 @@ const Project = async () => {
           </DialogContent>
         </Dialog>
       </div>
-      {result.map((project) => (
-        <ProjectCard project={project} key={project.id} />
-      ))}
+      <div className="grid grid-cols-3">
+        {result.map((project) => (
+          <ProjectCard project={project} key={project.id} />
+        ))}
+      </div>
     </div>
   );
 };
