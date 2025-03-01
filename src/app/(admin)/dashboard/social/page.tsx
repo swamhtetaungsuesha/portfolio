@@ -29,7 +29,7 @@ const Social = async () => {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-5 gap-2">
         {result.map((social) => (
           <SocialCard social={social} key={social.id} />
         ))}

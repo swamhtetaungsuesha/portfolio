@@ -29,7 +29,7 @@ export default async function Page() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-4 gap-2">
         {result.map((company) => (
           <CompanyCard company={company} key={company.id} />
         ))}

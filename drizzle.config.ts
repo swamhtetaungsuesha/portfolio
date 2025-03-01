@@ -6,9 +6,7 @@ export default defineConfig({
   schema: "./src/db/schema/*",
   dialect: "postgresql",
   dbCredentials: {
-    url:
-      process.env.DATABASE_URL ||
-      "postgresql://postgres.lnjjsvkburqzgztmjbkf:SF1dcb58eiSdF2kU@aws-0-us-east-1.pooler.supabase.com:6543/postgres",
+    url: process.env.DATABASE_URL!,
     host: process.env.POSTGRES_HOST,
   },
 });

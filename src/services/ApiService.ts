@@ -44,6 +44,7 @@ class APIService {
       return Promise.resolve(response.data);
     } catch (e) {
       const error = e as AxiosError;
+      console.log(error);
       console.log(error.message, "error message");
       if (error.response && error.code && error.message) {
         throw new APIServiceError(

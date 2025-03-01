@@ -133,8 +133,8 @@ const Page = () => {
           </p>
         </div>
       </div> */}
-      <div className="w-1/2">
-        <h1 className="h1 mb-20 text-white">
+      <div className="lg:w-1/2 w-3/4">
+        <h1 className="h1 lg:mb-20 mb-10 text-white">
           About <span className="text-accent">Me</span>
         </h1>
         <div className="flex flex-col gap-10">
@@ -143,7 +143,7 @@ const Page = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            // className="max-w-sm xl:max-w-xl max-auto xl:max-0 mb-10 xl:mb-16"
+            className="lg:text-base text-sm"
           >
             Glad to see you! I'm Anulika Nwankwo. I'm a Product Designer and an
             experienced IT product manager. I have to admit that becoming this
@@ -157,6 +157,7 @@ const Page = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
+            className="lg:text-base text-sm"
           >
             I'm deeply fascinated with all aspects of user experience design,
             user research, user journey mapping and visual design. I advocate
@@ -167,7 +168,7 @@ const Page = () => {
             helping to ensure that the product is user-centric, functional, and
             aesthetically pleasing.
           </motion.p>
-          <div className="absolute right-20 top-20">
+          <div className="absolute lg:right-20 right-5 lg:top-20 top-5">
             <ProjectsBtn />
           </div>
         </div>

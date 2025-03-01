@@ -8,6 +8,7 @@ const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sora",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 export const metadata: Metadata = {
   title: "Swam Htet Aung - Frontend Developer",
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sora.variable} antialiased`}>
+      <body className={`${sora.variable} antialiased font-sora`}>
         {/* <Layout>{children}</Layout> */}
         {children}
         <Toaster />
