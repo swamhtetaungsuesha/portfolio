@@ -16,3 +16,10 @@ export function formatDateString(dateString: string) {
 
   return format(date, "MMMM yyyy"); // Format as "Month Year" (e.g., February 2023)
 }
+
+export function addInitialZero(number: number) {
+  if (number < 10) {
+    return "0" + number;
+  }
+  return number.toString();
+}
