@@ -1,8 +1,9 @@
 "use client";
 
+import { Bell, Monitor, Palette, Settings, User } from "lucide-react";
 import * as React from "react";
-import { User, Settings, Palette, Bell, Monitor } from "lucide-react";
 
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Sidebar,
   SidebarContent,
@@ -14,7 +15,6 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

@@ -1,5 +1,5 @@
 "use client";
-import { CompanySelect, ExperienceWithCompany } from "@/db/schema";
+import { ExperienceWithCompany } from "@/db/schema";
 import { addInitialZero, formatDateString } from "@/utils/format";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,17 @@ const CareersView = (props: { experiences: ExperienceWithCompany[] }) => {
   const { experiences } = props;
   const [currentCompany, setCurrentCompany] = useState(0);
   const currentExperience = experiences[currentCompany];
+  const handlePrevious = () => {
+    if (currentCompany > 0) {
+      setCurrentCompany(currentCompany - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentCompany < experiences.length - 1) {
+      setCurrentCompany(currentCompany + 1);
+    }
+  };
   return (
     <div className="w-full h-full flex flex-col">
       <div className="lg:flex-1 lg:p-20 p-10 bg-black/20">
@@ -27,13 +38,21 @@ const CareersView = (props: { experiences: ExperienceWithCompany[] }) => {
               />
             )}
           </div>
-          <div className="flex flex-row lg:static absolute bottom-5">
-            <div className="flex-1 lg:w-full w-20 h-20 border-b border-b-white/10 hover:border-b-accent flex justify-center items-center hover:bg-white/10 transition-all duration-100 cursor-pointer">
+          <div className="flex flex-row lg:static absolute left-0 bottom-5 w-full justify-between">
+            <button
+              onClick={handlePrevious}
+              disabled={currentCompany === 0}
+              className="flex-1 lg:w-full w-20 h-20 border-b border-b-white/10 hover:border-b-accent flex justify-center items-center hover:bg-white/10 transition-all duration-100 cursor-pointer"
+            >
               <MdKeyboardArrowLeft />
-            </div>
-            <div className="flex-1 lg:w-full w-20 h-20 border-b border-b-white/10 hover:border-b-accent flex justify-center items-center hover:bg-white/10 transition-all duration-100 cursor-pointer">
+            </button>
+            <button
+              onClick={handleNext}
+              disabled={currentCompany === experiences.length - 1}
+              className="flex-1 lg:w-full w-20 h-20 border-b border-b-white/10 hover:border-b-accent flex justify-center items-center hover:bg-white/10 transition-all duration-100 cursor-pointer"
+            >
               <MdKeyboardArrowRight />
-            </div>
+            </button>
           </div>
         </div>
         <div>

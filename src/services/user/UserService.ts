@@ -1,4 +1,6 @@
-import { TagSelect, UserSelect, UserWithLinks } from "@/db/schema";
+import { db } from "@/db";
+import { users, UserSelect } from "@/db/schema";
+import { getTableColumns } from "drizzle-orm";
 import { ResponseData } from "../ApiResponse";
 import ApiService from "../ApiService";
 import { APIServiceError } from "../ApiServiceError";
@@ -6,10 +8,17 @@ import { APIServiceError } from "../ApiServiceError";
 class TagService {
   async get(): Promise<ResponseData<UserSelect>> {
     try {
-      const res: ResponseData<UserSelect> = await ApiService.call(
-        "/api/secured/user/get",
-        "GET"
-      );
+      const { createdAt, updatedAt, ...rest } = getTableColumns(users);
+      const result = await db
+        .select({ ...rest })
+        .from(users)
+        .limit(1);
+
+      const res: ResponseData<UserSelect> = {
+        success: true,
+        message: "Success Get User",
+        data: result[0],
+      };
 
       return res;
     } catch (e) {

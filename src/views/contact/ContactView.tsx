@@ -1,6 +1,6 @@
+import Bulb from "@/components/Bulb";
 import Circles from "@/components/Circles";
 import TopLeftImg from "@/components/TopLeftImg";
-import Bulb from "@/components/Bulb";
 import { SocialSelect, UserSelect } from "@/db/schema";
 
 const ContactView = async (props: {

@@ -1,5 +1,4 @@
 "use client";
-// nav data
 
 export const navData = [
   { name: "home", path: "/" },
@@ -19,7 +18,6 @@ export const navData = [
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 const Nav = () => {
   const pathname = usePathname();
@@ -33,9 +31,6 @@ const Nav = () => {
 
   return (
     <nav className="bg-black/10 h-screen flex flex-col">
-      {/* <div className="animate-spin-slow">
-        <Image width={80} height={80} src={"/logo-2.png"} alt="logo" />
-      </div> */}
       <div className="flex justify-center items-center my-4">
         <h1 className="text-2xl font-bold">
           SH <span className="text-accent">.</span>
@@ -68,7 +63,6 @@ const Nav = () => {
           }}
         ></div>
       </div>
-      {/* <div>Social Media</div> */}
     </nav>
   );
 };

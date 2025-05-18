@@ -1,15 +1,12 @@
 "use client";
 // icons
-import Image from "next/image";
-import { motion } from "framer-motion";
+import Circles from "@/components/Circles";
 import ProjectsBtn from "@/components/ProjectsBtn";
 import { fadeIn } from "@/utils/variants";
-import Circles from "@/components/Circles";
+import { motion } from "framer-motion";
 // import BurnCircle from "../../components/";
 import Bulb from "@/components/Bulb";
-import { getTableColumns } from "drizzle-orm";
-import { db } from "@/db";
-import { users, UserSelect } from "@/db/schema";
+import { UserSelect } from "@/db/schema";
 
 const AboutView = (props: { user: UserSelect }) => {
   return (

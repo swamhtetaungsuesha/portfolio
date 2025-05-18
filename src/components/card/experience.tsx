@@ -1,20 +1,13 @@
 // ExperienceDataCard.tsx
 "use client";
-import React from "react";
-import { companies, CompanySelect, ExperienceWithCompany } from "@/db/schema";
-import { format } from "date-fns";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
+import { CompanySelect, ExperienceWithCompany } from "@/db/schema";
 import ExperienceService from "@/services/experience/ExperienceService";
-import { toast } from "sonner";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-import ExperienceForm from "../form/experience";
 import { formatDateString } from "@/utils/format";
+import React from "react";
+import { toast } from "sonner";
+import ExperienceForm from "../form/experience";
+import { Badge } from "../ui/badge";
 import {
   Card,
   CardContent,
@@ -23,7 +16,13 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Badge } from "../ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 interface ExperienceDataCardProps {
   experience: ExperienceWithCompany;

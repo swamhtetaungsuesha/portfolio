@@ -1,18 +1,13 @@
 // CompanyDataCard.tsx
 "use client";
-import React from "react";
-import { CompanySelect } from "@/db/schema";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-import CompanyForm from "../form/company";
+import { CompanySelect } from "@/db/schema";
 import CompanyService from "@/services/company/CompanyService";
+import { Eye } from "lucide-react";
+import Link from "next/link";
+import React from "react";
 import { toast } from "sonner";
+import CompanyForm from "../form/company";
 import {
   Card,
   CardContent,
@@ -20,8 +15,13 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Eye } from "lucide-react";
-import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 interface CompanyCardProps {
   company: CompanySelect;

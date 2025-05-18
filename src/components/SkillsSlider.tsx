@@ -1,74 +1,23 @@
 "use client";
 
+import { SkillWithTag } from "@/db/schema";
+import { getTimeAgo } from "@/utils/format";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
-interface Skill {
-  id: number;
-  icon: string;
-  name: string;
-  timeAgo: string;
-  category: string;
-}
-
-const initialSkills: Skill[] = [
-  {
-    id: 1,
-    icon: "/logo.svg?height=40&width=40",
-    name: "AWS",
-    timeAgo: "12 months ago",
-    category: "Cloud",
-  },
-  {
-    id: 2,
-    icon: "/logo.svg?height=40&width=40",
-    name: "Angular",
-    timeAgo: "about 7 years ago",
-    category: "Frontend",
-  },
-  {
-    id: 3,
-    icon: "/logo.svg?height=40&width=40",
-    name: "Tailwind CSS",
-    timeAgo: "about 2 years ago",
-    category: "Frontend",
-  },
-  {
-    id: 4,
-    icon: "/logo.svg?height=40&width=40",
-    name: "MongoDB",
-    timeAgo: "about 1 year ago",
-    category: "Database",
-  },
-  {
-    id: 5,
-    icon: "/logo.svg?height=40&width=40",
-    name: "React",
-    timeAgo: "about 5 years ago",
-    category: "Frontend",
-  },
-  {
-    id: 6,
-    icon: "/logo.svg?height=40&width=40",
-    name: "Node.js",
-    timeAgo: "about 6 years ago",
-    category: "Backend",
-  },
-];
-
-export default function SkillsSlider() {
-  const [skills, setSkills] = useState(initialSkills.slice(0, 5));
+export default function SkillsSlider(props: { skills: SkillWithTag[] }) {
+  const [skills, setSkills] = useState(props.skills.slice(0, 5));
 
   useEffect(() => {
     const interval = setInterval(() => {
       setSkills((currentSkills) => {
         const nextSkill =
-          initialSkills[
-            (initialSkills.findIndex(
+          props.skills[
+            (props.skills.findIndex(
               (skill) => skill.id === currentSkills[4].id
             ) +
               1) %
-              initialSkills.length
+              props.skills.length
           ];
         return [nextSkill, ...currentSkills.slice(0, 4)];
       });
@@ -78,9 +27,9 @@ export default function SkillsSlider() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center max-w-2xl mx-auto p-8">
+    <div className="flex flex-col items-center max-w-3xl mx-auto md:px-8 px-4 md:py-8 ">
       <h1 className="text-4xl font-bold mb-4">Skills</h1>
-      <p className="text-gray-600 text-center mb-8">
+      <p className="text-center mb-8">
         Specialized in full-stack development with expertise in various
         technologies and frameworks
       </p>
@@ -92,10 +41,10 @@ export default function SkillsSlider() {
               key={skill.id}
               initial={{ opacity: 0, y: -120 }}
               animate={{
-                opacity: index === 2 ? 1 : 0.6,
-                y: (index - 2) * 120,
-                scale: index === 2 ? 1 : 0.9,
-                zIndex: 5 - Math.abs(index - 2),
+                opacity: index === 1 ? 1 : 0.6,
+                y: index * 120,
+                scale: index === 1 ? 1 : 0.9,
+                // zIndex: 5 - Math.abs(index - 2),
               }}
               exit={{ opacity: 0, y: 360 }}
               transition={{
@@ -107,23 +56,25 @@ export default function SkillsSlider() {
               className="absolute w-full"
             >
               <div
-                className={`bg-black/20 rounded-lg shadow-sm p-6 flex items-center gap-4 transition-all duration-300 ${
+                className={`bg-black/30 rounded-lg shadow-sm p-6 flex items-center gap-4 transition-all duration-300 ${
                   index === 2 ? "shadow-md" : ""
                 }`}
               >
-                <img
+                {/* <img
                   src={skill.icon}
                   alt={`${skill.name} icon`}
                   className="w-10 h-10 object-contain"
-                />
+                /> */}
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-lg">{skill.name}</h3>
-                    <span className="text-sm text-gray-500">
-                      {skill.timeAgo}
+                    <h3 className="font-semibold md:text-lg   text-sm">
+                      {skill.tag}
+                    </h3>
+                    <span className="md:text-sm text-xs text-gray-500">
+                      {getTimeAgo(skill.startedAt)}
                     </span>
                   </div>
-                  <p>{skill.category}</p>
+                  <p className="md:text-sm text-xs">{skill.category}</p>
                 </div>
               </div>
             </motion.div>

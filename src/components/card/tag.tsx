@@ -1,16 +1,18 @@
 // TagDataCard.tsx
 "use client";
-import React from "react";
-import { TagSelect } from "@/db/schema";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { TagSelect } from "@/db/schema";
+import TagService from "@/services/tag/TagService";
+import React from "react";
+import { toast } from "sonner";
+import TagForm from "../form/tag";
 import {
   Dialog,
   DialogContent,
@@ -18,9 +20,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import TagForm from "../form/tag";
-import TagService from "@/services/tag/TagService";
-import { toast } from "sonner";
 
 interface TagDataCardProps {
   tag: TagSelect;

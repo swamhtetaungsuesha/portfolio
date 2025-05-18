@@ -1,16 +1,14 @@
-import { socials, users } from "@/db/schema";
-import { db } from "@/db";
+import SocialService from "@/services/social/SocialService";
+import UserService from "@/services/user/UserService";
 import ContactView from "@/views/contact/ContactView";
-import { getTableColumns } from "drizzle-orm";
 
 const ContactPage = async () => {
-  const { createdAt, updatedAt, ...rest } = getTableColumns(users);
-  const user = await db
-    .select({ ...rest })
-    .from(users)
-    .limit(1);
-  const socialsResult = await db.select().from(socials);
-  return <ContactView socials={socialsResult} user={user[0]} />;
+  const userResult = await UserService.get();
+  const socialsResult = await SocialService.getList();
+  if (!userResult.success || !socialsResult.success) {
+    return <div>505 Server Error</div>;
+  }
+  return <ContactView socials={socialsResult.data} user={userResult.data} />;
 };
 
 export default ContactPage;

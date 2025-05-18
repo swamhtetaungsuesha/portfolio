@@ -1,19 +1,12 @@
 // SkillDataCard.tsx
 "use client";
-import React from "react";
-import { SkillWithTag } from "@/db/schema";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-import SkillForm from "../form/skill";
+import { SkillWithTag } from "@/db/schema";
 import SkillService from "@/services/skill/SkillService";
-import { toast } from "sonner";
 import { formatDateString } from "@/utils/format";
+import React from "react";
+import { toast } from "sonner";
+import SkillForm from "../form/skill";
 import {
   Card,
   CardContent,
@@ -22,6 +15,13 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 interface SkillCardProps {
   skill: SkillWithTag;

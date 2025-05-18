@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState } from "react";
-import { FileImage, UploadCloud, X } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
+import { FileImage, UploadCloud, X } from "lucide-react";
+import { ChangeEvent, useState } from "react";
 
 interface ImageUploadProps {
   onUpload: (file: File) => Promise<void>;

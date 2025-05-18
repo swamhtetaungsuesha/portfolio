@@ -1,18 +1,16 @@
 // ProjectDataCard.tsx
 "use client";
-import React from "react";
-import { ProjectWithTags } from "@/db/schema";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-import ProjectForm from "../form/project";
+import { ProjectWithTags } from "@/db/schema";
 import ProjectService from "@/services/project/ProjectService";
+import { formatDateString } from "@/utils/format";
+import { LinkIcon } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+import { FaGithubSquare } from "react-icons/fa";
 import { toast } from "sonner";
+import ProjectForm from "../form/project";
+import { Badge } from "../ui/badge";
 import {
   Card,
   CardContent,
@@ -21,12 +19,13 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { formatDateString } from "@/utils/format";
-import { Badge } from "../ui/badge";
-import { LinkIcon } from "lucide-react";
-import { TbBrandGithub } from "react-icons/tb";
-import { FaGithub, FaGithubSquare } from "react-icons/fa";
-import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 interface ProjectDataCardProps {
   project: ProjectWithTags;

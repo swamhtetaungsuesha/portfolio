@@ -1,7 +1,5 @@
 // SocialDataCard.tsx
 "use client";
-import React from "react";
-import { SocialSelect } from "@/db/schema";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
 import {
   Dialog,
@@ -10,11 +8,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import SocialForm from "../form/social";
+import { SocialSelect } from "@/db/schema";
 import SocialService from "@/services/social/SocialService";
-import { toast } from "sonner";
-import Link from "next/link";
 import { LinkIcon } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+import { toast } from "sonner";
+import SocialForm from "../form/social";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 interface SocialDataCardProps {

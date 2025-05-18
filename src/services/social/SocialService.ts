@@ -1,4 +1,5 @@
-import { SkillSelect, SocialSelect, SocialWithoutUser } from "@/db/schema";
+import { db } from "@/db";
+import { socials, SocialSelect, SocialWithoutUser } from "@/db/schema";
 import { ResponseData } from "../ApiResponse";
 import ApiService from "../ApiService";
 import { APIServiceError } from "../ApiServiceError";
@@ -7,10 +8,12 @@ import { SocialDataWithoutId } from "./Social";
 class SocialService {
   async getList(): Promise<ResponseData<SocialSelect[]>> {
     try {
-      const res: ResponseData<SocialSelect[]> = await ApiService.call(
-        "/api/secured/social/get",
-        "GET"
-      );
+      const result = await db.select().from(socials);
+      const res: ResponseData<SocialSelect[]> = {
+        success: true,
+        message: "Success Get Socials",
+        data: result,
+      };
 
       return res;
     } catch (e) {
