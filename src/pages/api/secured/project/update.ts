@@ -1,11 +1,5 @@
 import { db } from "@/db";
-import {
-  projects,
-  ProjectSelect,
-  projectTags,
-  ProjectWithTags,
-  tags,
-} from "@/db/schema";
+import { projects, projectTags, ProjectWithTags, tags } from "@/db/schema";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
 import { ProjectData } from "@/services/project/Project";
@@ -83,8 +77,7 @@ export default async function handler(
         message: "You have updated a project successfully!",
         data: updatedProject,
       });
-    } catch (error) {
-      console.error("Update Project Error:", error);
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to update project" });

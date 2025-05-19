@@ -1,13 +1,12 @@
-import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { credentials } from "@/db/schema";
-import { NextApiRequest, NextApiResponse } from "next";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
+import { eq } from "drizzle-orm";
 
 export default async function handler(
   req: ExtendedNextApiRequest<{ id: number }>,
-  res: ExtendedNextApiReponse<null>
+  res: ExtendedNextApiReponse<void>
 ) {
   if (req.method === "POST") {
     try {
@@ -21,14 +20,12 @@ export default async function handler(
         .set({ isAuthenticated: false })
         .where(eq(credentials.id, req.body.id));
 
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Logged out successfully",
-          data: null,
-        });
-    } catch (error) {
+      res.status(200).json({
+        success: true,
+        message: "Logged out successfully",
+        data: undefined,
+      });
+    } catch {
       res.status(500).json({ success: false, message: "An error occurred" });
     }
   } else {

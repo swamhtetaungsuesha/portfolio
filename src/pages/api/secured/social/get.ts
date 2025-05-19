@@ -5,19 +5,23 @@ import { ExtendedNextApiReponse } from "@/services/ApiResponse";
 import { getTableColumns } from "drizzle-orm";
 
 export default async function handler(
-  req: ExtendedNextApiRequest<{}>,
+  req: ExtendedNextApiRequest<void>,
   res: ExtendedNextApiReponse<SocialSelect[]>
 ) {
   if (req.method === "GET") {
     try {
-      const { createdAt, updatedAt, ...rest } = getTableColumns(socials);
+      const {
+        createdAt: _createdAt,
+        updatedAt: _updatedAt,
+        ...rest
+      } = getTableColumns(socials);
       const result = await db.select({ ...rest }).from(socials);
       res.status(200).json({
         success: true,
         message: "Success",
         data: result,
       });
-    } catch (error) {
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to get list of social" });

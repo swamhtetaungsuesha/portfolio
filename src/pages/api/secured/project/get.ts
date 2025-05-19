@@ -5,7 +5,7 @@ import { ExtendedNextApiReponse } from "@/services/ApiResponse";
 import { desc, eq, sql } from "drizzle-orm";
 
 export default async function handler(
-  req: ExtendedNextApiRequest<{}>,
+  req: ExtendedNextApiRequest<void>,
   res: ExtendedNextApiReponse<ProjectWithTags[]>
 ) {
   if (req.method === "GET") {
@@ -34,7 +34,7 @@ export default async function handler(
         message: "Success",
         data: result,
       });
-    } catch (error) {
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to get list of project" });

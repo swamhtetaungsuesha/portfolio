@@ -1,4 +1,3 @@
-import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { credentials } from "@/db/schema";
 import bcrypt from "bcryptjs";
@@ -27,8 +26,7 @@ export default async function handler(
       res
         .status(200)
         .json({ success: true, message: "Auth initialized successfully" });
-    } catch (error) {
-      console.error("Initialize Error:", error);
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Error initializing auth" });

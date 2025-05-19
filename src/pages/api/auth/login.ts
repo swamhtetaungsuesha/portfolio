@@ -1,17 +1,16 @@
-import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { credentials } from "@/db/schema";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { NextApiRequest, NextApiResponse } from "next";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
+import bcrypt from "bcryptjs";
+import { eq } from "drizzle-orm";
+import jwt from "jsonwebtoken";
 
 const SECRET_KEY = process.env.SECRET_KEY!;
 
 export default async function handler(
   req: ExtendedNextApiRequest<{ username: string; password: string }>,
-  res: ExtendedNextApiReponse<null>
+  res: ExtendedNextApiReponse<void>
 ) {
   if (req.method === "POST") {
     try {
@@ -54,9 +53,8 @@ export default async function handler(
 
       return res
         .status(200)
-        .json({ success: true, message: "Login successful", data: null }); // No token sent back
-    } catch (error) {
-      console.error("Authenticate Error:", error);
+        .json({ success: true, message: "Login successful", data: undefined }); // No token sent back
+    } catch {
       return res
         .status(500)
         .json({ success: false, message: "An error occurred" });

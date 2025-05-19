@@ -21,7 +21,7 @@ export default async function handler(
         message: "You are deleted a social successfully!",
         data: result[0],
       });
-    } catch (error) {
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to delete social" });

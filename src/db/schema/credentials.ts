@@ -1,4 +1,4 @@
-import { pgTable, serial, text, varchar, boolean } from "drizzle-orm/pg-core";
+import { boolean, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
 
 export const credentials = pgTable("credentials", {
   id: serial("id").primaryKey(),

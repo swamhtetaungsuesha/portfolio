@@ -24,8 +24,7 @@ export default async function handler(
         message: "You are updated a company successfully!",
         data: result[0],
       });
-    } catch (error) {
-      console.error("Insert Company Error:", error);
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to insert company" });

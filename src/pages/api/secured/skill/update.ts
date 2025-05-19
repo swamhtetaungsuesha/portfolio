@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { skills, SkillSelect, SkillWithTag, tags } from "@/db/schema";
+import { skills, SkillWithTag, tags } from "@/db/schema";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
 import { eq } from "drizzle-orm";
@@ -49,8 +49,7 @@ export default async function handler(
         message: "You are updated a skill successfully!",
         data: updatedSkill,
       });
-    } catch (error) {
-      console.error("Updated Company Error:", error);
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to update skill" });

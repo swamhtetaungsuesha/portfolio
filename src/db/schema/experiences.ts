@@ -1,6 +1,5 @@
 import {
   boolean,
-  date,
   integer,
   pgTable,
   serial,

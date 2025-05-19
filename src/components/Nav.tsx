@@ -37,7 +37,7 @@ const Nav = () => {
         </h1>
       </div>
       <div className="flex flex-col flex-1 justify-between relative">
-        {navData.map((link, index) => {
+        {navData.map((link) => {
           return (
             <Link
               href={link.path}

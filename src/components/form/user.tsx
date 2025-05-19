@@ -40,8 +40,7 @@ export default function UserForm({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    let res: ResponseData<UserSelect>;
-    res = await UserCommandService.update({
+    const res = await UserCommandService.update({
       ...values,
       id: defaultValues.id,
     });

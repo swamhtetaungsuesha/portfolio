@@ -12,7 +12,7 @@ JSONB_BUILD_OBJECT(
 )`;
 
 export default async function handler(
-  req: ExtendedNextApiRequest<{}>,
+  req: ExtendedNextApiRequest<void>,
   res: ExtendedNextApiReponse<UserSelect[]>
 ) {
   if (req.method === "GET") {
@@ -40,7 +40,7 @@ export default async function handler(
         message: "Success",
         data: result,
       });
-    } catch (error) {
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to get list of user" });

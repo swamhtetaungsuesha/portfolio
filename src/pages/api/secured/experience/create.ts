@@ -21,8 +21,7 @@ export default async function handler(
         message: "You are created a experience successfully!",
         data: result[0],
       });
-    } catch (error) {
-      console.error("Insert Experience Error:", error);
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to insert experience" });

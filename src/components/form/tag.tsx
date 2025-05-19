@@ -33,8 +33,7 @@ export default function TagForm({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    let res: ResponseData<TagSelect>;
-    res = await TagCommandService.update({
+    const res = await TagCommandService.update({
       ...values,
       id: defaultValues.id,
     });

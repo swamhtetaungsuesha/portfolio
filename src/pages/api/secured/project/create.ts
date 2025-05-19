@@ -54,8 +54,7 @@ export default async function handler(
         message: "You are created a project successfully!",
         data: insertedProject,
       });
-    } catch (error) {
-      console.error("Insert Project Error:", error);
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to insert project" });

@@ -2,15 +2,19 @@ import { db } from "@/db";
 import { companies, CompanySelect } from "@/db/schema";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
-import { eq, getTableColumns } from "drizzle-orm";
+import { getTableColumns } from "drizzle-orm";
 
 export default async function handler(
-  req: ExtendedNextApiRequest<{}>,
+  req: ExtendedNextApiRequest<void>,
   res: ExtendedNextApiReponse<CompanySelect[]>
 ) {
   if (req.method === "GET") {
     try {
-      const { createdAt, updatedAt, ...rest } = getTableColumns(companies);
+      const {
+        createdAt: _createdAt,
+        updatedAt: _updatedAt,
+        ...rest
+      } = getTableColumns(companies);
       const result = await db.select({ ...rest }).from(companies);
       res.setHeader("Content-Type", "application/json");
       return res.status(200).json({
@@ -18,7 +22,7 @@ export default async function handler(
         message: "Success",
         data: result,
       });
-    } catch (error) {
+    } catch {
       res.setHeader("Content-Type", "application/json");
       return res
         .status(500)

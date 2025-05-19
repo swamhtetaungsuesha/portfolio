@@ -20,12 +20,12 @@ export const schema = {
   skills,
 };
 
-export * from "./users";
-export * from "./projects";
-export * from "./tags";
-export * from "./project-tags";
-export * from "./experiences";
 export * from "./companies";
-export * from "./socials";
 export * from "./credentials";
+export * from "./experiences";
+export * from "./project-tags";
+export * from "./projects";
 export * from "./skills";
+export * from "./socials";
+export * from "./tags";
+export * from "./users";

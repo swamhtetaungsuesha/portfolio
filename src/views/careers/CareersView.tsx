@@ -24,7 +24,7 @@ const CareersView = (props: { experiences: ExperienceWithCompany[] }) => {
     <div className="w-full h-full flex flex-col">
       <div className="lg:flex-1 lg:p-20 p-10 bg-black/20">
         <h3 className="uppercase lg:h3 font-bold mb-5 text-accent">Company</h3>
-        <h1 className="lg:h1 h3">Who I've Worked At</h1>
+        <h1 className="lg:h1 h3">Who I&apos;ve Worked At</h1>
       </div>
       <div className="flex-1 lg:p-20 p-5 flex lg:flex-row flex-col gap-20 lg:items-center items-start relative">
         <div>

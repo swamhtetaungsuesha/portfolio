@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { skills, SkillSelect, SkillWithTag, tags } from "@/db/schema";
+import { skills, SkillWithTag, tags } from "@/db/schema";
 import { ExtendedNextApiRequest } from "@/services/ApiRequest";
 import { ExtendedNextApiReponse } from "@/services/ApiResponse";
 import { SkillDataWithoutId } from "@/services/skill/Skill";
@@ -15,7 +15,11 @@ export default async function handler(
       const { tag: tagName, ...skillDetail } = skillData;
       const insertedSkill = await db.transaction(async (tx) => {
         const tag = await (async () => {
-          const { createdAt, updatedAt, ...rest } = getTableColumns(tags);
+          const {
+            createdAt: _createdAt,
+            updatedAt: _updatedAt,
+            ...rest
+          } = getTableColumns(tags);
           const [existingTag] = await tx
             .select({ ...rest })
             .from(tags)
@@ -45,8 +49,7 @@ export default async function handler(
         message: "You are created a skill successfully!",
         data: insertedSkill,
       });
-    } catch (error) {
-      console.error("Insert Skill Error:", error);
+    } catch {
       res
         .status(500)
         .json({ success: false, message: "Failed to insert skill" });

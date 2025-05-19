@@ -18,8 +18,7 @@ export default async function handler(
         message: "You are created a tag successfully!",
         data: result[0],
       });
-    } catch (error) {
-      console.error("Insert Tag Error:", error);
+    } catch {
       res.status(500).json({ success: false, message: "Failed to insert tag" });
     }
   } else {
