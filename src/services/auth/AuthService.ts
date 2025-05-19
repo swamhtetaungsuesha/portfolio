@@ -22,9 +22,9 @@ class AuthService {
     }
   }
 
-  async logout(payload: { id: string }): Promise<ResponseData<{}>> {
+  async logout(payload: { id: string }): Promise<ResponseData<void>> {
     try {
-      const response: ResponseData<{}> = await ApiService.call(
+      const response: ResponseData<void> = await ApiService.call(
         "/api/auth/logout",
         "POST",
         payload
