@@ -2,7 +2,6 @@
 "use client";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
 import { CompanySelect, ExperienceWithCompany } from "@/db/schema";
-import ExperienceService from "@/services/experience/ExperienceService";
 import { formatDateString } from "@/utils/format";
 import React from "react";
 import { toast } from "sonner";
@@ -23,6 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import ExperienceCommandService from "@/services/experience/CommandService";
 
 interface ExperienceDataCardProps {
   experience: ExperienceWithCompany;
@@ -34,7 +34,7 @@ const ExperienceCard: React.FC<ExperienceDataCardProps> = ({
   companies,
 }) => {
   const onDelete = async (id: number) => {
-    const res = await ExperienceService.delete({ id });
+    const res = await ExperienceCommandService.delete({ id });
     if (res.success) {
       toast("Success", {
         description: res.message,

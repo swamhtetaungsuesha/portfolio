@@ -1,7 +1,7 @@
-import ExperienceService from "@/services/experience/ExperienceService";
+import ExperienceQueryService from "@/services/experience/QueryService";
 import CareersView from "@/views/careers/CareersView";
 const CarrersPage = async () => {
-  const result = await ExperienceService.getList();
+  const result = await ExperienceQueryService.getList();
   if (!result.success) {
     return <div>505 Server Error</div>;
   }

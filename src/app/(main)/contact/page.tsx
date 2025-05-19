@@ -1,10 +1,10 @@
-import SocialService from "@/services/social/SocialService";
-import UserService from "@/services/user/UserService";
+import SocialQueryService from "@/services/social/QueryService";
+import UserQueryService from "@/services/user/QueryService";
 import ContactView from "@/views/contact/ContactView";
 
 const ContactPage = async () => {
-  const userResult = await UserService.get();
-  const socialsResult = await SocialService.getList();
+  const userResult = await UserQueryService.get();
+  const socialsResult = await SocialQueryService.getList();
   if (!userResult.success || !socialsResult.success) {
     return <div>505 Server Error</div>;
   }

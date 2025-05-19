@@ -4,23 +4,10 @@ import ApiService from "../ApiService";
 import { APIServiceError } from "../ApiServiceError";
 import { TagDataWithoutId } from "./Tag";
 
-class TagService {
-  async getList(): Promise<ResponseData<TagSelect[]>> {
-    try {
-      const res: ResponseData<TagSelect[]> = await ApiService.call(
-        "/api/secured/tag/get",
-        "GET"
-      );
-
-      return res;
-    } catch (e) {
-      const error = e as APIServiceError;
-
-      return { success: false, message: error.message };
-    }
-  }
-
-  async create(payload: TagDataWithoutId): Promise<ResponseData<TagSelect>> {
+class TagCommandService {
+  static async create(
+    payload: TagDataWithoutId
+  ): Promise<ResponseData<TagSelect>> {
     try {
       const response: ResponseData<TagSelect> = await ApiService.call(
         "/api/secured/tag/create",
@@ -38,7 +25,7 @@ class TagService {
       };
     }
   }
-  async update(payload: TagSelect): Promise<ResponseData<TagSelect>> {
+  static async update(payload: TagSelect): Promise<ResponseData<TagSelect>> {
     try {
       const response: ResponseData<TagSelect> = await ApiService.call(
         "/api/secured/tag/update",
@@ -57,7 +44,9 @@ class TagService {
     }
   }
 
-  async delete(payload: { id: number }): Promise<ResponseData<TagSelect>> {
+  static async delete(payload: {
+    id: number;
+  }): Promise<ResponseData<TagSelect>> {
     try {
       const response: ResponseData<TagSelect> = await ApiService.call(
         "/api/secured/tag/delete",
@@ -76,4 +65,4 @@ class TagService {
   }
 }
 
-export default new TagService();
+export default TagCommandService;

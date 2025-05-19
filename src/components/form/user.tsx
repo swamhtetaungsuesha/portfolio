@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { UserSelect } from "@/db/schema";
 import { ResponseData } from "@/services/ApiResponse";
-import UserService from "@/services/user/UserService";
+import UserCommandService from "@/services/user/CommandService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -41,7 +41,7 @@ export default function UserForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let res: ResponseData<UserSelect>;
-    res = await UserService.update({
+    res = await UserCommandService.update({
       ...values,
       id: defaultValues.id,
     });

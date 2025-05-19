@@ -1,17 +1,14 @@
 import UserForm from "@/components/form/user";
-import { db } from "@/db";
-import { users } from "@/db/schema";
-import { getTableColumns } from "drizzle-orm";
+import UserQueryService from "@/services/user/QueryService";
 
 const User = async () => {
-  const { createdAt, updatedAt, ...rest } = getTableColumns(users);
-  const result = await db
-    .select({ ...rest })
-    .from(users)
-    .limit(1);
+  const result = await UserQueryService.get();
+  if (!result.success) {
+    return <div>500 Server Error</div>;
+  }
   return (
     <div>
-      <UserForm defaultValues={result[0]} />
+      <UserForm defaultValues={result.data} />
     </div>
   );
 };

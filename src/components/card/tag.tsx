@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TagSelect } from "@/db/schema";
-import TagService from "@/services/tag/TagService";
 import React from "react";
 import { toast } from "sonner";
 import TagForm from "../form/tag";
@@ -20,6 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import TagCommandService from "@/services/tag/CommandService";
 
 interface TagDataCardProps {
   tag: TagSelect;
@@ -27,7 +27,7 @@ interface TagDataCardProps {
 
 const TagCard: React.FC<TagDataCardProps> = ({ tag }) => {
   const onDelete = async (id: number) => {
-    const res = await TagService.delete({ id });
+    const res = await TagCommandService.delete({ id });
     if (res.success) {
       toast("Success", {
         description: res.message,

@@ -1,12 +1,14 @@
 import TagCard from "@/components/card/tag";
-import { db } from "@/db";
-import { tags } from "@/db/schema";
+import TagQueryService from "@/services/tag/QueryService";
 
 const Tag = async () => {
-  const result = await db.select().from(tags);
+  const result = await TagQueryService.getList();
+  if (!result.success) {
+    return <div>500 Server Error</div>;
+  }
   return (
     <div className="grid grid-cols-5 gap-2">
-      {result.map((tag) => (
+      {result.data.map((tag) => (
         <TagCard tag={tag} key={tag.id} />
       ))}
     </div>

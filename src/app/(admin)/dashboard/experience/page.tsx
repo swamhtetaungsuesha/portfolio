@@ -8,32 +8,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { db } from "@/db";
-import { companies, CompanySelect, experiences } from "@/db/schema";
-import { desc, eq, getTableColumns, sql } from "drizzle-orm";
-const populateCompany = sql<CompanySelect>`JSONB_BUILD_OBJECT(
-    'id', ${companies.id},
-    'image', ${companies.image},
-    'name', ${companies.name},
-    'uri', ${companies.link}
-)`;
+import CompanyQueryService from "@/services/company/QueryService";
+import ExperienceQueryService from "@/services/experience/QueryService";
+
 const Experience = async () => {
-  const { createdAt, updatedAt, ...rest } = getTableColumns(companies);
-  const companiesResult = await db.select({ ...rest }).from(companies);
-  const result = await db
-    .select({
-      id: experiences.id,
-      company: populateCompany.as("company"),
-      position: experiences.position,
-      description: experiences.description,
-      startedAt: experiences.startedAt,
-      endedAt: experiences.endedAt,
-      isActive: experiences.isActive,
-    })
-    .from(experiences)
-    .leftJoin(companies, eq(experiences.companyId, companies.id))
-    .groupBy(experiences.id, companies.id)
-    .orderBy(desc(experiences.startedAt));
+  const companiesResult = await CompanyQueryService.getList();
+
+  const experiencesResult = await ExperienceQueryService.getList();
+  if (!experiencesResult.success || !companiesResult.success) {
+    return <div>505 Server Error</div>;
+  }
   return (
     <div>
       <div className="flex justify-end items-center mb-4">
@@ -45,15 +29,15 @@ const Experience = async () => {
             <DialogHeader>
               <DialogTitle>Add New Experience</DialogTitle>
             </DialogHeader>
-            <ExperienceForm companies={companiesResult} />
+            <ExperienceForm companies={companiesResult.data} />
           </DialogContent>
         </Dialog>
       </div>
       <div className="grid grid-cols-3 gap-2">
-        {result.map((experience) => (
+        {experiencesResult.data.map((experience) => (
           <ExperienceCard
             experience={experience}
-            companies={companiesResult}
+            companies={companiesResult.data}
             key={experience.id}
           />
         ))}

@@ -2,7 +2,6 @@
 "use client";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
 import { ProjectWithTags } from "@/db/schema";
-import ProjectService from "@/services/project/ProjectService";
 import { formatDateString } from "@/utils/format";
 import { LinkIcon } from "lucide-react";
 import Link from "next/link";
@@ -26,6 +25,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import ProjectCommandService from "@/services/project/CommandService";
 
 interface ProjectDataCardProps {
   project: ProjectWithTags;
@@ -33,7 +33,7 @@ interface ProjectDataCardProps {
 
 const ProjectCard: React.FC<ProjectDataCardProps> = ({ project }) => {
   const onDelete = async (id: number) => {
-    const res = await ProjectService.delete({ id });
+    const res = await ProjectCommandService.delete({ id });
     if (res.success) {
       toast("Success", {
         description: res.message,

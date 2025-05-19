@@ -8,11 +8,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { db } from "@/db";
-import { socials } from "@/db/schema";
+import SocialQueryService from "@/services/social/QueryService";
 
 const Social = async () => {
-  const result = await db.select().from(socials);
+  const result = await SocialQueryService.getList();
+  if (!result.success) {
+    return <div>500 Server Error</div>;
+  }
   return (
     <div>
       <div className="flex justify-end items-center mb-4">
@@ -30,7 +32,7 @@ const Social = async () => {
         </Dialog>
       </div>
       <div className="grid grid-cols-5 gap-2">
-        {result.map((social) => (
+        {result.data.map((social) => (
           <SocialCard social={social} key={social.id} />
         ))}
       </div>

@@ -11,8 +11,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { SocialSelect, SocialWithoutUser } from "@/db/schema";
 import { ResponseData } from "@/services/ApiResponse";
+import SocialCommandService from "@/services/social/CommandService";
 import { SocialDataWithoutId } from "@/services/social/Social";
-import SocialService from "@/services/social/SocialService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -36,12 +36,12 @@ export default function SocialForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let res: ResponseData<SocialSelect | SocialDataWithoutId>;
     if (defaultValues) {
-      res = await SocialService.update({
+      res = await SocialCommandService.update({
         ...values,
         id: defaultValues.id,
       });
     } else {
-      res = await SocialService.create(values);
+      res = await SocialCommandService.create(values);
     }
     if (res.success) {
       toast("Success", {

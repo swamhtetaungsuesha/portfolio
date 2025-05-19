@@ -9,13 +9,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { SocialSelect } from "@/db/schema";
-import SocialService from "@/services/social/SocialService";
 import { LinkIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 import SocialForm from "../form/social";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import SocialCommandService from "@/services/social/CommandService";
 
 interface SocialDataCardProps {
   social: SocialSelect;
@@ -23,7 +23,7 @@ interface SocialDataCardProps {
 
 const SocialCard: React.FC<SocialDataCardProps> = ({ social }) => {
   const onDelete = async (id: number) => {
-    const res = await SocialService.delete({ id });
+    const res = await SocialCommandService.delete({ id });
     if (res.success) {
       toast("Success", {
         description: res.message,

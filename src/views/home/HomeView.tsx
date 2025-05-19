@@ -6,8 +6,6 @@ import ProjectBtn from "../../components/ProjectsBtn";
 import { UserSelect } from "@/db/schema";
 
 export default function HomeView(props: { user: UserSelect }) {
-  const slogan =
-    " Start a <span>code.</span><br />Prove you're <span>alive.</span>";
   return (
     <div className=" h-full w-full">
       <div className="w-3/5 h-full absolute right-0 bottom-0">
@@ -18,7 +16,7 @@ export default function HomeView(props: { user: UserSelect }) {
         <div className=" flex flex-col justify-center xl:pt-40 xl:text-left h-full container mx-auto xl:items-start items-center">
           <h1
             className="h1 [&>span]:text-accent"
-            dangerouslySetInnerHTML={{ __html: slogan }}
+            dangerouslySetInnerHTML={{ __html: props.user.slogan }}
           />
 
           <motion.p

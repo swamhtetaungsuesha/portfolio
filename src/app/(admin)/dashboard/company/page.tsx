@@ -7,12 +7,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { companies } from "@/db/schema";
-import { db } from "@/db";
 import CompanyCard from "@/components/card/company";
 import CompanyForm from "@/components/form/company";
+import CompanyQueryService from "@/services/company/QueryService";
 export default async function Page() {
-  const result = await db.select().from(companies);
+  const result = await CompanyQueryService.getList();
+  if (!result.success) {
+    return <div>500 Server Error</div>;
+  }
   return (
     <div>
       <div className="flex justify-end items-center mb-4">
@@ -30,7 +32,7 @@ export default async function Page() {
         </Dialog>
       </div>
       <div className="grid grid-cols-4 gap-2">
-        {result.map((company) => (
+        {result.data.map((company) => (
           <CompanyCard company={company} key={company.id} />
         ))}
       </div>

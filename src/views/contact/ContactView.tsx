@@ -36,7 +36,7 @@ const ContactView = async (props: {
           <p className="font-semibold text-white">MY SPACE</p>
           <div className="md:mt-4 flex flex-col">
             {props.socials.map((social) => (
-              <p>
+              <p key={social.id}>
                 <a href={social.link} target="_blank">
                   {social.name}
                 </a>

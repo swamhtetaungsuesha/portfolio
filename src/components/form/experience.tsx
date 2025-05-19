@@ -15,7 +15,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { CompanySelect, ExperienceWithCompany } from "@/db/schema";
 import { ResponseData } from "@/services/ApiResponse";
 import { ExperienceData } from "@/services/experience/Experience";
-import ExperienceService from "@/services/experience/ExperienceService"; // Assuming you have an ExperienceService
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -28,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import ExperienceCommandService from "@/services/experience/CommandService";
 
 const formSchema = z.object({
   companyId: z.number().min(1), // Assuming companyId is a number
@@ -66,12 +66,12 @@ export default function ExperienceForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let res: ResponseData<ExperienceWithCompany | ExperienceData>;
     if (defaultValues) {
-      res = await ExperienceService.update({
+      res = await ExperienceCommandService.update({
         ...values,
         id: defaultValues.id,
       });
     } else {
-      res = await ExperienceService.create(values);
+      res = await ExperienceCommandService.create(values);
     }
     if (res.success) {
       toast("Success", {

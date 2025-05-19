@@ -8,30 +8,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { db } from "@/db";
-import { projects, projectTags, ProjectWithTags, tags } from "@/db/schema";
-import { desc, eq, sql } from "drizzle-orm";
+import ProjectQueryService from "@/services/project/QueryService";
 
 const Project = async () => {
-  const result: ProjectWithTags[] = await db
-    .select({
-      id: projects.id,
-      name: projects.name,
-      description: projects.description,
-      liveUrl: projects.liveUrl,
-      githubUrl: projects.githubUrl,
-      thumbnailImage: projects.thumbnailImage,
-      image: projects.thumbnailImage,
-      tags: sql<string[]>`ARRAY_AGG(${tags.name})`.as("tags"),
-      isActive: projects.isActive,
-      startedAt: projects.startedAt,
-      endedAt: projects.endedAt,
-    })
-    .from(projects)
-    .leftJoin(projectTags, eq(projectTags.projectId, projects.id))
-    .leftJoin(tags, eq(tags.id, projectTags.tagId))
-    .groupBy(projects.id)
-    .orderBy(desc(projects.startedAt));
+  const result = await ProjectQueryService.getList();
+  if (!result.success) {
+    return <div>500 Server Error</div>;
+  }
   return (
     <div>
       <div className="flex justify-end items-center mb-4">
@@ -49,7 +32,7 @@ const Project = async () => {
         </Dialog>
       </div>
       <div className="grid grid-cols-3 gap-2">
-        {result.map((project) => (
+        {result.data.map((project) => (
           <ProjectCard project={project} key={project.id} />
         ))}
       </div>

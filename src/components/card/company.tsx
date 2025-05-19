@@ -2,7 +2,6 @@
 "use client";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
 import { CompanySelect } from "@/db/schema";
-import CompanyService from "@/services/company/CompanyService";
 import { Eye } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -22,6 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import CompanyCommandService from "@/services/company/CommandService";
 
 interface CompanyCardProps {
   company: CompanySelect;
@@ -29,7 +29,7 @@ interface CompanyCardProps {
 
 const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
   const onDelete = async (id: number) => {
-    const res = await CompanyService.delete({ id });
+    const res = await CompanyCommandService.delete({ id });
     if (res.success) {
       toast("Success", {
         description: res.message,

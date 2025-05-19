@@ -33,7 +33,10 @@ const ProjectsView = (props: { projects: ProjectWithTags[] }) => {
       <div className="grid xl:grid-rows-4 h-5/6">
         {currentItems.map((item, index) => (
           <Link href={item.liveUrl || item.githubUrl} key={item.id}>
-            <ProjectCard project={item} index={index + 1} />
+            <ProjectCard
+              project={item}
+              index={index + 1 + itemsPerPage * (currentPage - 1)}
+            />
           </Link>
         ))}
       </div>

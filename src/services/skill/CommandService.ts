@@ -1,39 +1,11 @@
-import { db } from "@/db";
-import { skills, SkillSelect, SkillWithTag, tags } from "@/db/schema";
-import { eq, sql } from "drizzle-orm";
+import { SkillSelect, SkillWithTag } from "@/db/schema";
 import { ResponseData } from "../ApiResponse";
 import ApiService from "../ApiService";
 import { APIServiceError } from "../ApiServiceError";
 import { SkillDataWithoutId } from "./Skill";
 
-class SkillService {
-  async getList(): Promise<ResponseData<SkillWithTag[]>> {
-    try {
-      const result = await db
-        .select({
-          id: skills.id,
-          category: skills.category,
-          startedAt: skills.startedAt,
-          tag: sql<string>`${tags.name}`.as("tag"),
-        })
-        .from(skills)
-        .leftJoin(tags, eq(skills.tagId, tags.id));
-
-      const res: ResponseData<SkillWithTag[]> = {
-        success: true,
-        message: "Success Get Skills!",
-        data: result,
-      };
-
-      return res;
-    } catch (e) {
-      const error = e as APIServiceError;
-
-      return { success: false, message: error.message };
-    }
-  }
-
-  async create(
+class SkillCommandService {
+  static async create(
     payload: SkillDataWithoutId
   ): Promise<ResponseData<SkillWithTag>> {
     try {
@@ -53,7 +25,9 @@ class SkillService {
       };
     }
   }
-  async update(payload: SkillWithTag): Promise<ResponseData<SkillWithTag>> {
+  static async update(
+    payload: SkillWithTag
+  ): Promise<ResponseData<SkillWithTag>> {
     try {
       const response: ResponseData<SkillWithTag> = await ApiService.call(
         "/api/secured/skill/update",
@@ -72,7 +46,9 @@ class SkillService {
     }
   }
 
-  async delete(payload: { id: number }): Promise<ResponseData<SkillSelect>> {
+  static async delete(payload: {
+    id: number;
+  }): Promise<ResponseData<SkillSelect>> {
     try {
       const response: ResponseData<SkillSelect> = await ApiService.call(
         "/api/secured/skill/delete",
@@ -91,4 +67,4 @@ class SkillService {
   }
 }
 
-export default new SkillService();
+export default SkillCommandService;

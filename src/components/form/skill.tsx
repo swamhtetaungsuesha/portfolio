@@ -12,8 +12,8 @@ import { Input } from "@/components/ui/input";
 import { MonthYearPicker } from "@/components/ui/month-year-picker"; // Assuming you have a MonthYearPicker
 import { SkillWithTag } from "@/db/schema";
 import { ResponseData } from "@/services/ApiResponse";
+import SkillCommandService from "@/services/skill/CommandService";
 import { SkillDataWithoutId } from "@/services/skill/Skill";
-import SkillService from "@/services/skill/SkillService"; // Assuming you have a SkillService
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -44,12 +44,12 @@ export default function SkillForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let res: ResponseData<SkillWithTag | SkillDataWithoutId>;
     if (defaultValues) {
-      res = await SkillService.update({
+      res = await SkillCommandService.update({
         ...values,
         id: defaultValues.id,
       });
     } else {
-      res = await SkillService.create(values);
+      res = await SkillCommandService.create(values);
     }
     if (res.success) {
       toast("Success", {

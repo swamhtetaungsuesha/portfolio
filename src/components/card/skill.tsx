@@ -2,7 +2,6 @@
 "use client";
 import { Button } from "@/components/ui/button"; // Shadcn UI Button
 import { SkillWithTag } from "@/db/schema";
-import SkillService from "@/services/skill/SkillService";
 import { formatDateString } from "@/utils/format";
 import React from "react";
 import { toast } from "sonner";
@@ -22,6 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import SkillCommandService from "@/services/skill/CommandService";
 
 interface SkillCardProps {
   skill: SkillWithTag;
@@ -29,7 +29,7 @@ interface SkillCardProps {
 
 const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
   const onDelete = async (id: number) => {
-    const res = await SkillService.delete({ id });
+    const res = await SkillCommandService.delete({ id });
     if (res.success) {
       toast("Success", {
         description: res.message,

@@ -8,20 +8,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { db } from "@/db";
-import { skills, tags } from "@/db/schema";
-import { eq, sql } from "drizzle-orm";
+import SkillQueryService from "@/services/skill/QueryService";
 
 const Skill = async () => {
-  const result = await db
-    .select({
-      id: skills.id,
-      category: skills.category,
-      startedAt: skills.startedAt,
-      tag: sql<string>`${tags.name}`.as("tag"),
-    })
-    .from(skills)
-    .leftJoin(tags, eq(skills.tagId, tags.id));
+  const result = await SkillQueryService.getList();
+  if (!result.success) {
+    return <div>500 Server Error</div>;
+  }
   return (
     <div>
       <div className="flex justify-end items-center mb-4">
@@ -39,7 +32,7 @@ const Skill = async () => {
         </Dialog>
       </div>
       <div className="grid grid-cols-5 gap-2">
-        {result.map((skill) => (
+        {result.data.map((skill) => (
           <SkillCard skill={skill} key={skill.id} />
         ))}
       </div>

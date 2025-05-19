@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { TagSelect } from "@/db/schema";
 import { ResponseData } from "@/services/ApiResponse";
-import TagService from "@/services/tag/TagService";
+import TagCommandService from "@/services/tag/CommandService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -34,7 +34,7 @@ export default function TagForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let res: ResponseData<TagSelect>;
-    res = await TagService.update({
+    res = await TagCommandService.update({
       ...values,
       id: defaultValues.id,
     });

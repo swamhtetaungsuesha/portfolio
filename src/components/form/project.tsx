@@ -16,12 +16,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { ProjectWithTags } from "@/db/schema";
 import { ResponseData } from "@/services/ApiResponse";
 import { ProjectData } from "@/services/project/Project";
-import ProjectService from "@/services/project/ProjectService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 import { MonthYearPicker } from "../ui/month-year-picker";
+import ProjectCommandService from "@/services/project/CommandService";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -48,12 +48,12 @@ export default function ProjectForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let res: ResponseData<ProjectWithTags | ProjectData>;
     if (defaultValues) {
-      res = await ProjectService.update({
+      res = await ProjectCommandService.update({
         ...values,
         id: defaultValues.id,
       });
     } else {
-      res = await ProjectService.create(values);
+      res = await ProjectCommandService.create(values);
     }
     if (res.success) {
       toast("Success", {

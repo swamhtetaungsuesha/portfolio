@@ -1,17 +1,11 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
 import { APIServiceError } from "@/services/ApiServiceError";
-
-interface ErrorResponseData {
-  code: string;
-  message: string;
-}
+import axios, { AxiosError, AxiosInstance } from "axios";
 
 class APIService {
   private api: AxiosInstance;
 
   constructor() {
     this.api = axios.create({
-      baseURL: "http://localhost:3000",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -27,25 +21,16 @@ class APIService {
       if (method === "POST") {
         response = await this.api.post(endpoint, payload);
       } else {
-        console.log(
-          `Calling API: ${this.api.defaults.baseURL}${endpoint}, Method: ${method}`
-        );
-        console.log("....", endpoint);
         response = await this.api.get(endpoint, {
           headers: {
             Accept: "application/json",
           },
         });
-
-        console.log("Response headers:", response.headers);
-        console.log("Response type:", response.headers["content-type"]);
       }
 
       return Promise.resolve(response.data);
     } catch (e) {
       const error = e as AxiosError;
-      console.log(error);
-      console.log(error.message, "error message");
       if (error.response && error.code && error.message) {
         throw new APIServiceError(
           error.response.status,

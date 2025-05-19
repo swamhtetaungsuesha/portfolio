@@ -11,8 +11,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { CompanySelect } from "@/db/schema";
 import { ResponseData } from "@/services/ApiResponse";
+import CompanyCommandService from "@/services/company/CommandService";
 import { CompanyDataWithoutId } from "@/services/company/Company";
-import CompanyService from "@/services/company/CompanyService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -37,12 +37,12 @@ export default function CompanyForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let res: ResponseData<CompanySelect | CompanyDataWithoutId>;
     if (defaultValues) {
-      res = await CompanyService.update({
+      res = await CompanyCommandService.update({
         ...values,
         id: defaultValues.id,
       });
     } else {
-      res = await CompanyService.create(values);
+      res = await CompanyCommandService.create(values);
     }
     if (res.success) {
       toast("Success", {
