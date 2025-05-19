@@ -15,11 +15,8 @@ export default async function handler(
       const { tag: tagName, ...skillDetail } = skillData;
       const insertedSkill = await db.transaction(async (tx) => {
         const tag = await (async () => {
-          const {
-            createdAt: _createdAt,
-            updatedAt: _updatedAt,
-            ...rest
-          } = getTableColumns(tags);
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { createdAt, updatedAt, ...rest } = getTableColumns(tags);
           const [existingTag] = await tx
             .select({ ...rest })
             .from(tags)

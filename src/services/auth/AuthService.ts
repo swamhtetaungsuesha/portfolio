@@ -6,9 +6,9 @@ class AuthService {
   async login(payload: {
     username: string;
     password: string;
-  }): Promise<ResponseData<{}>> {
+  }): Promise<ResponseData<void>> {
     try {
-      const res: ResponseData<{}> = await ApiService.call(
+      const res: ResponseData<void> = await ApiService.call(
         "/api/auth/login",
         "POST",
         payload

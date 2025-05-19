@@ -10,11 +10,8 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      const {
-        createdAt: _createdAt,
-        updatedAt: _updatedAt,
-        ...rest
-      } = getTableColumns(tags);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { createdAt, updatedAt, ...rest } = getTableColumns(tags);
       const result = await db.select({ ...rest }).from(tags);
       res.status(200).json({
         success: true,

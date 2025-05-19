@@ -7,11 +7,8 @@ import { APIServiceError } from "../ApiServiceError";
 class UserQueryService {
   static async get(): Promise<ResponseData<UserSelect>> {
     try {
-      const {
-        createdAt: _createdAt,
-        updatedAt: _updatedAt,
-        ...rest
-      } = getTableColumns(users);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { createdAt, updatedAt, ...rest } = getTableColumns(users);
       const result = await db
         .select({ ...rest })
         .from(users)

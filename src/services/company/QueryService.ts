@@ -7,11 +7,8 @@ import { db } from "@/db";
 class CompanyQueryService {
   static async getList(): Promise<ResponseData<CompanySelect[]>> {
     try {
-      const {
-        createdAt: _createdAt,
-        updatedAt: _updatedAt,
-        ...rest
-      } = getTableColumns(companies);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { createdAt, updatedAt, ...rest } = getTableColumns(companies);
       const result = await db.select({ ...rest }).from(companies);
       const res: ResponseData<CompanySelect[]> = {
         success: true,
