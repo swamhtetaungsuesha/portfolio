@@ -1,13 +1,13 @@
-import SkillsSlider from "@/components/SkillsSlider";
-import TopLeftImg from "@/components/TopLeftImg";
-import Flower from "@/components/Flower";
+import Explosion from "@/components/elements/Explosion";
+import SkillsSlider from "./SkillsSlider";
+import TopLeftImg from "@/components/elements/TopLeftImg";
 import { SkillWithTag } from "@/db/schema";
 
 const SkillsView = (props: { skills: SkillWithTag[] }) => {
   return (
     <div className="flex flex-col h-full items-center justify-center w-full relative">
       <TopLeftImg />
-      <Flower />
+      <Explosion />
       <SkillsSlider skills={props.skills} />
     </div>
   );

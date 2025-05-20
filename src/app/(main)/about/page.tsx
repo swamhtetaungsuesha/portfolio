@@ -3,10 +3,7 @@ import AboutView from "@/views/about/AboutView";
 
 const AboutPage = async () => {
   const result = await UserQueryService.get();
-  if (!result.success) {
-    return <div>500 Server Error</div>;
-  }
-  return <AboutView user={result.data} />;
+  return <AboutView user={result} />;
 };
 
 export default AboutPage;

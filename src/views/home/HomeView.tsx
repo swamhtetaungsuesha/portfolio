@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/variants";
-import ParticlesContainer from "../../components/ParticlesContainer";
-import ProjectBtn from "../../components/ProjectsBtn";
+import ParticlesContainer from "./ParticlesContainer";
+import ProjectBtn from "./ProjectsBtn";
 import { UserSelect } from "@/db/schema";
 
 export default function HomeView(props: { user: UserSelect }) {

@@ -1,12 +1,12 @@
 "use client";
 // icons
-import Circles from "@/components/Circles";
-import ProjectsBtn from "@/components/ProjectsBtn";
+import Circles from "@/components/elements/Circles";
 import { fadeIn } from "@/utils/variants";
 import { motion } from "framer-motion";
 // import BurnCircle from "../../components/";
-import Bulb from "@/components/Bulb";
+import Bulb from "@/components/elements/Bulb";
 import { UserSelect } from "@/db/schema";
+import ResumeBtn from "./ResumeBtn";
 
 const AboutView = (props: { user: UserSelect }) => {
   return (
@@ -35,7 +35,7 @@ const AboutView = (props: { user: UserSelect }) => {
             {props.user.aboutMeContent[1]}
           </motion.p>
           <div className="absolute lg:right-20 right-5 lg:top-20 top-5">
-            <ProjectsBtn />
+            <ResumeBtn link={props.user.resumeUrl} />
           </div>
         </div>
       </div>

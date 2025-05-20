@@ -1,6 +1,6 @@
-import Bulb from "@/components/Bulb";
-import Circles from "@/components/Circles";
-import TopLeftImg from "@/components/TopLeftImg";
+import Bulb from "@/components/elements/Bulb";
+import Circles from "@/components/elements/Circles";
+import TopLeftImg from "@/components/elements/TopLeftImg";
 import { SocialSelect, UserSelect } from "@/db/schema";
 
 const ContactView = async (props: {
@@ -13,10 +13,10 @@ const ContactView = async (props: {
       <Circles />
       <Bulb />
       <div className="flex-1 flex flex-col justify-center items-center">
-        <h1 className="md:text-9xl text-6xl text-white font-semibold italic">
+        <h1 className="md:text-9xl text-5xl text-white font-semibold italic">
           Let’s Talk
         </h1>
-        <h1 className="md:text-9xl text-6xl text-accent font-semibold italic tracking-widest uppercase">
+        <h1 className="md:text-9xl text-5xl text-accent font-semibold italic tracking-widest uppercase">
           Ideas
         </h1>
       </div>
@@ -24,10 +24,10 @@ const ContactView = async (props: {
         <div className="">
           <p className="font-semibold text-white">CONTACT</p>
           <div className="md:mt-4 flex flex-col">
-            <p>
+            <p className="hover:opacity-50">
               <a href={"tel:" + props.user.phoneNo}>{props.user.phoneNo}</a>
             </p>
-            <p>
+            <p className="hover:opacity-50">
               <a href={"mailto:" + props.user.email}>{props.user.email}</a>
             </p>
           </div>
@@ -36,7 +36,7 @@ const ContactView = async (props: {
           <p className="font-semibold text-white">MY SPACE</p>
           <div className="md:mt-4 flex flex-col">
             {props.socials.map((social) => (
-              <p key={social.id}>
+              <p key={social.id} className="hover:opacity-50">
                 <a href={social.link} target="_blank">
                   {social.name}
                 </a>

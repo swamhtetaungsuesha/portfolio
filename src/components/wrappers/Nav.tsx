@@ -30,7 +30,7 @@ const Nav = () => {
   }, [pathname]);
 
   return (
-    <nav className="bg-black/10 h-screen flex flex-col">
+    <nav className="bg-black/10 h-screen flex flex-col z-20">
       <div className="flex justify-center items-center my-4">
         <h1 className="text-2xl font-bold">
           SH <span className="text-accent">.</span>

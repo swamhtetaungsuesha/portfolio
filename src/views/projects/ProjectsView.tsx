@@ -1,6 +1,6 @@
 "use client";
-import Pagination from "@/components/Pagination";
-import ProjectCard from "@/components/ProjectCard";
+import Pagination from "./Pagination";
+import ProjectCard from "./ProjectCard";
 import { ProjectWithTags } from "@/db/schema";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Link from "next/link";
@@ -32,7 +32,11 @@ const ProjectsView = (props: { projects: ProjectWithTags[] }) => {
     <div className="flex flex-col h-full w-full">
       <div className="grid xl:grid-rows-4 h-5/6">
         {currentItems.map((item, index) => (
-          <Link href={item.liveUrl || item.githubUrl} key={item.id}>
+          <Link
+            href={item.liveUrl || item.githubUrl}
+            key={item.id}
+            target="_blank"
+          >
             <ProjectCard
               project={item}
               index={index + 1 + itemsPerPage * (currentPage - 1)}

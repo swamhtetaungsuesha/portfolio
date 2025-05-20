@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Flower = () => {
+const Explosion = () => {
   return (
     <div className="w-[800px] xl:w-full absolute -right-16 -bottom-2 mix-blend-color-dodge z-10 opacity-10">
       <Image
@@ -14,4 +14,4 @@ const Flower = () => {
   );
 };
 
-export default Flower;
+export default Explosion;

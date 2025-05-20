@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="h-full px-10 flex items-center flex-1 gap-10">
+    <div className="h-full px-10 flex items-center flex-1 md:gap-10 gap-4">
       <button
         onClick={handlePrevious}
         disabled={currentPage === 1}

@@ -1,4 +1,6 @@
+"use client";
 import { ProjectWithTags } from "@/db/schema";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { addInitialZero } from "@/utils/format";
 import Image from "next/image";
 import { MdNavigateNext } from "react-icons/md";
@@ -9,6 +11,7 @@ const ProjectCard = ({
   project: ProjectWithTags;
   index: number;
 }) => {
+  const isMobile = useIsMobile();
   return (
     <div className="border-b border-white/10 px-10 h-full flex flex-row items-center w-full hover:bg-white/10 transition-all duration-700 group overflow-hidden xl:py-0 py-5">
       <div className="flex xl:flex-row flex-col xl:items-center items-start xl:gap-10 gap-2 xl:justify-between justify-evenly w-full h-full">
@@ -21,7 +24,7 @@ const ProjectCard = ({
           <p className="xl:w-96 w-full xl:group-hover:opacity-0">
             {project.description}
           </p>
-          {project.thumbnailImage && (
+          {project.thumbnailImage && !isMobile && (
             <div className="absolute inset-0 opacity-0 transition-opacity duration-700 xl:group-hover:opacity-100">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent z-[1]" />
               <Image

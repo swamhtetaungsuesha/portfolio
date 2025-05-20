@@ -3,11 +3,8 @@ import ProjectsView from "@/views/projects/ProjectsView";
 
 const ProjectPage = async () => {
   const result = await ProjectQueryService.getList();
-  if (!result.success) {
-    return <div>500 Server Error</div>;
-  }
 
-  return <ProjectsView projects={result.data} />;
+  return <ProjectsView projects={result} />;
 };
 
 export default ProjectPage;

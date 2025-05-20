@@ -1,26 +1,14 @@
-import { companies, CompanySelect } from "@/db/schema";
-import { ResponseData } from "../ApiResponse";
-import { APIServiceError } from "../ApiServiceError";
-import { getTableColumns } from "drizzle-orm";
 import { db } from "@/db";
+import { companies, CompanySelect } from "@/db/schema";
+import { getTableColumns } from "drizzle-orm";
 
 class CompanyQueryService {
-  static async getList(): Promise<ResponseData<CompanySelect[]>> {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { createdAt, updatedAt, ...rest } = getTableColumns(companies);
-      const result = await db.select({ ...rest }).from(companies);
-      const res: ResponseData<CompanySelect[]> = {
-        success: true,
-        message: "Success Get Companies",
-        data: result,
-      };
-      return res;
-    } catch (e) {
-      const error = e as APIServiceError;
+  static async getList(): Promise<CompanySelect[]> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { createdAt, updatedAt, ...rest } = getTableColumns(companies);
+    const result = await db.select({ ...rest }).from(companies);
 
-      return { success: false, message: error.message };
-    }
+    return result;
   }
 }
 

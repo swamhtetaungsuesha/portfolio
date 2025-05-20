@@ -3,10 +3,8 @@ import UserView from "@/views/admin/user/UserView";
 
 const UserPage = async () => {
   const result = await UserQueryService.get();
-  if (!result.success) {
-    return <div>500 Server Error</div>;
-  }
-  return <UserView user={result.data} />;
+
+  return <UserView user={result} />;
 };
 
 export default UserPage;

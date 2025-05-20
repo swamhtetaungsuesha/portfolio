@@ -93,7 +93,7 @@ module.exports = {
         },
       },
       backgroundImage: {
-        explosion: 'url("/bg-explosion-6.webp")',
+        explosion: 'url("/bg-explosion-circle.webp")',
         circles: 'url("/bg-circles.png")',
         circleStar: 'url("/circle-star.svg")',
         site: 'url("/site-bg.svg")',
@@ -102,7 +102,7 @@ module.exports = {
         "spin-slow": "spin 6s linear infinite",
       },
       fontFamily: {
-        sora: ["`var(--font-sora)`", "sans-serif"],
+        roboto: ["`var(--font-roboto)`", "sans-serif"],
         poppins: ["`var(--font-poppins)`", "sans-serif"],
       },
       borderRadius: {
