@@ -1,16 +1,12 @@
-import UserForm from "@/components/form/user";
 import UserQueryService from "@/services/user/QueryService";
+import UserView from "@/views/admin/user/UserView";
 
-const User = async () => {
+const UserPage = async () => {
   const result = await UserQueryService.get();
   if (!result.success) {
     return <div>500 Server Error</div>;
   }
-  return (
-    <div>
-      <UserForm defaultValues={result.data} />
-    </div>
-  );
+  return <UserView user={result.data} />;
 };
 
-export default User;
+export default UserPage;

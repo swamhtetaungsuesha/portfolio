@@ -5,8 +5,7 @@ import { CompanySelect, ExperienceWithCompany } from "@/db/schema";
 import { formatDateString } from "@/utils/format";
 import React from "react";
 import { toast } from "sonner";
-import ExperienceForm from "../form/experience";
-import { Badge } from "../ui/badge";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -14,15 +13,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import ExperienceCommandService from "@/services/experience/CommandService";
+import ExperienceForm from "./ExperienceForm";
 
 interface ExperienceDataCardProps {
   experience: ExperienceWithCompany;

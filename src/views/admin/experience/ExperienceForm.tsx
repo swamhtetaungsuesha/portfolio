@@ -19,14 +19,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
-import { MonthYearPicker } from "../ui/month-year-picker";
+import { MonthYearPicker } from "@/components/ui/month-year-picker";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
 import ExperienceCommandService from "@/services/experience/CommandService";
 
 const formSchema = z.object({

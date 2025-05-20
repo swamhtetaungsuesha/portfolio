@@ -1,7 +1,7 @@
 import ProjectQueryService from "@/services/project/QueryService";
 import ProjectsView from "@/views/projects/ProjectsView";
 
-const Project = async () => {
+const ProjectPage = async () => {
   const result = await ProjectQueryService.getList();
   if (!result.success) {
     return <div>500 Server Error</div>;
@@ -10,4 +10,4 @@ const Project = async () => {
   return <ProjectsView projects={result.data} />;
 };
 
-export default Project;
+export default ProjectPage;

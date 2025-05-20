@@ -6,22 +6,22 @@ import { Eye } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
-import CompanyForm from "../form/company";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import CompanyCommandService from "@/services/company/CommandService";
+import CompanyForm from "./CompanyForm";
 
 interface CompanyCardProps {
   company: CompanySelect;

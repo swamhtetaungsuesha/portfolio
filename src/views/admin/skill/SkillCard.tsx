@@ -5,7 +5,6 @@ import { SkillWithTag } from "@/db/schema";
 import { formatDateString } from "@/utils/format";
 import React from "react";
 import { toast } from "sonner";
-import SkillForm from "../form/skill";
 import {
   Card,
   CardContent,
@@ -13,15 +12,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import SkillCommandService from "@/services/skill/CommandService";
+import SkillForm from "./SkillForm";
 
 interface SkillCardProps {
   skill: SkillWithTag;

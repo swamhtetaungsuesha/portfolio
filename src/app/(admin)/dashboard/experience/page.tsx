@@ -1,17 +1,8 @@
-import ExperienceCard from "@/components/card/experience";
-import ExperienceForm from "@/components/form/experience";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import CompanyQueryService from "@/services/company/QueryService";
 import ExperienceQueryService from "@/services/experience/QueryService";
+import ExperienceView from "@/views/admin/experience/ExperienceView";
 
-const Experience = async () => {
+const ExperiencePage = async () => {
   const companiesResult = await CompanyQueryService.getList();
 
   const experiencesResult = await ExperienceQueryService.getList();
@@ -19,31 +10,11 @@ const Experience = async () => {
     return <div>505 Server Error</div>;
   }
   return (
-    <div>
-      <div className="flex justify-end items-center mb-4">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button>Add New</Button>
-          </DialogTrigger>
-          <DialogContent className="w-full">
-            <DialogHeader>
-              <DialogTitle>Add New Experience</DialogTitle>
-            </DialogHeader>
-            <ExperienceForm companies={companiesResult.data} />
-          </DialogContent>
-        </Dialog>
-      </div>
-      <div className="grid grid-cols-3 gap-2">
-        {experiencesResult.data.map((experience) => (
-          <ExperienceCard
-            experience={experience}
-            companies={companiesResult.data}
-            key={experience.id}
-          />
-        ))}
-      </div>
-    </div>
+    <ExperienceView
+      companies={companiesResult.data}
+      experiences={experiencesResult.data}
+    />
   );
 };
 
-export default Experience;
+export default ExperiencePage;

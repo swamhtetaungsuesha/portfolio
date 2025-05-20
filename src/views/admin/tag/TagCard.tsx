@@ -11,15 +11,15 @@ import {
 import { TagSelect } from "@/db/schema";
 import React from "react";
 import { toast } from "sonner";
-import TagForm from "../form/tag";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import TagCommandService from "@/services/tag/CommandService";
+import TagForm from "./TagForm";
 
 interface TagDataCardProps {
   tag: TagSelect;

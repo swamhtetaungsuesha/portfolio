@@ -1,7 +1,7 @@
 import UserQueryService from "@/services/user/QueryService";
 import AboutView from "@/views/about/AboutView";
 
-const Page = async () => {
+const AboutPage = async () => {
   const result = await UserQueryService.get();
   if (!result.success) {
     return <div>500 Server Error</div>;
@@ -9,4 +9,4 @@ const Page = async () => {
   return <AboutView user={result.data} />;
 };
 
-export default Page;
+export default AboutPage;

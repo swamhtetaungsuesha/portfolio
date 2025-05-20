@@ -8,8 +8,7 @@ import Link from "next/link";
 import React from "react";
 import { FaGithubSquare } from "react-icons/fa";
 import { toast } from "sonner";
-import ProjectForm from "../form/project";
-import { Badge } from "../ui/badge";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -17,15 +16,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import ProjectCommandService from "@/services/project/CommandService";
+import ProjectForm from "./ProjectForm";
 
 interface ProjectDataCardProps {
   project: ProjectWithTags;

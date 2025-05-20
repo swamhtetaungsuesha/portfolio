@@ -54,10 +54,11 @@ export default async function handler(
       return res
         .status(200)
         .json({ success: true, message: "Login successful", data: undefined }); // No token sent back
-    } catch {
+    } catch (error) {
+      const err = error as Error;
       return res
         .status(500)
-        .json({ success: false, message: "An error occurred" });
+        .json({ success: false, message: "An error occurred: " + err.message });
     }
   } else {
     return res
