@@ -4,7 +4,7 @@ import { addInitialZero, formatDateString } from "@/utils/format";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
 const CareersView = (props: { experiences: ExperienceWithCompany[] }) => {
   const { experiences } = props;
   const [currentCompany, setCurrentCompany] = useState(0);
@@ -22,7 +22,7 @@ const CareersView = (props: { experiences: ExperienceWithCompany[] }) => {
   };
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="lg:flex-1 lg:p-20 p-10 bg-black/20">
+      <div className=" lg:p-20 p-10 bg-black/20">
         <h3 className="uppercase lg:h3 font-bold mb-5 text-accent">Company</h3>
         <h1 className="lg:h1 h3">Who I&apos;ve Worked At</h1>
       </div>
@@ -38,7 +38,7 @@ const CareersView = (props: { experiences: ExperienceWithCompany[] }) => {
               />
             )}
           </div>
-          <div className="flex flex-row lg:static absolute left-0 bottom-5 w-full justify-between">
+          {/* <div className="flex flex-row lg:static absolute left-0 bottom-5 w-full justify-between">
             <button
               onClick={handlePrevious}
               disabled={currentCompany === 0}
@@ -53,7 +53,7 @@ const CareersView = (props: { experiences: ExperienceWithCompany[] }) => {
             >
               <MdKeyboardArrowRight />
             </button>
-          </div>
+          </div> */}
         </div>
         <div>
           <h2 className="lg:text-3xl text-xl font-semibold mb-4">
@@ -61,30 +61,47 @@ const CareersView = (props: { experiences: ExperienceWithCompany[] }) => {
           </h2>
           <div>
             {currentExperience.description.map((desc, i) => (
-              <p key={i} className="lg:text-base text-xs">
+              <p key={i} className="lg:text-base text-sm">
                 {desc}
               </p>
             ))}
           </div>
           <div className="my-2">
-            <p className="lg:text-base text-xs">
+            <p className="lg:text-base text-sm">
               {formatDateString(currentExperience.startedAt)} -{" "}
               {currentExperience.endedAt
                 ? formatDateString(currentExperience.endedAt)
-                : "Still"}
+                : "Present"}
             </p>
           </div>
           <Link
             href={currentExperience.company.link}
-            className="flex flex-row items-center gap-2 mt-4 group hover:opacity-85"
+            target="_blank"
+            className="flex flex-row items-center gap-2 mt-10 group hover:opacity-85"
           >
-            Learn More{" "}
-            <MdKeyboardArrowRight className="group-hover:translate-x-4 group-hover:text-accent transition" />
+            Explore More
+            <HiArrowRight className="group-hover:translate-x-4 group-hover:text-accent transition" />
           </Link>
-          <div className="px-10 flex items-center flex-1 gap-10 absolute lg:top-20 lg:right-20 top-10 right-0">
+          <div className="md:px-10 flex items-center flex-1 md:gap-10 gap-5 xl:absolute xl:top-10 lg:right-20 top-10 right-0 xl:w-auto w-full justify-center mt-10">
+            <button
+              onClick={handlePrevious}
+              disabled={currentCompany <= 0}
+              className="text-xl text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Next page"
+            >
+              <HiArrowLeft />
+            </button>
             <p className="text-accent">{addInitialZero(currentCompany + 1)}</p>
             <p>/</p>
             <p>{addInitialZero(experiences.length)}</p>
+            <button
+              onClick={handleNext}
+              disabled={currentCompany + 1 >= experiences.length}
+              className="text-xl text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Next page"
+            >
+              <HiArrowRight />
+            </button>
           </div>
         </div>
       </div>

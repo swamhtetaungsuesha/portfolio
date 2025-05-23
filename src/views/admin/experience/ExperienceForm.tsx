@@ -36,7 +36,7 @@ const formSchema = z.object({
     .array(z.string())
     .nonempty("Please add at least one description item"),
   startedAt: z.string().length(6),
-  endedAt: z.string().length(6).nullable(),
+  endedAt: z.union([z.string().length(6), z.string().length(0)]).optional(),
   isActive: z.boolean(),
 });
 
@@ -55,7 +55,7 @@ export default function ExperienceForm({
           position: defaultValues.position,
           description: defaultValues.description,
           startedAt: defaultValues.startedAt,
-          endedAt: defaultValues.endedAt,
+          endedAt: defaultValues.endedAt || undefined,
           isActive: defaultValues.isActive,
         }
       : {
@@ -68,10 +68,14 @@ export default function ExperienceForm({
     if (defaultValues) {
       res = await ExperienceCommandService.update({
         ...values,
+        endedAt: values.endedAt || null,
         id: defaultValues.id,
       });
     } else {
-      res = await ExperienceCommandService.create(values);
+      res = await ExperienceCommandService.create({
+        ...values,
+        endedAt: values.endedAt || null,
+      });
     }
     if (res.success) {
       toast("Success", {

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { CalendarIcon, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { format, parse, setMonth, setYear } from "date-fns";
 
 import { cn } from "@/lib/utils";
@@ -76,6 +76,12 @@ export function MonthYearPicker({ value, onChange }: MonthYearPickerProps) {
     });
   };
 
+  const handleClear = () => {
+    setDate(null);
+    onChange?.(""); // Pass empty string to clear the value
+    setIsOpen(false); // Close the popover after clearing
+  };
+
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen} modal={true}>
       <PopoverTrigger asChild>
@@ -88,6 +94,20 @@ export function MonthYearPicker({ value, onChange }: MonthYearPickerProps) {
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {date ? format(date, "MMMM yyyy") : <span>Pick a month/year</span>}
+          {date && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className="ml-auto h-6 w-6 -mr-2"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent opening the popover
+                handleClear();
+              }}
+            >
+              <X className="h-4 w-4" />
+              <span className="sr-only">Clear</span>
+            </Button>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0 z-50" align="start">
@@ -140,6 +160,11 @@ export function MonthYearPicker({ value, onChange }: MonthYearPickerProps) {
               ))}
             </SelectContent>
           </Select>
+          <div className="flex justify-end">
+            <Button variant="outline" size="sm" onClick={handleClear}>
+              Clear
+            </Button>
+          </div>
         </div>
       </PopoverContent>
     </Popover>

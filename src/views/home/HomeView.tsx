@@ -28,7 +28,7 @@ export default function HomeView(props: { user: UserSelect }) {
           >
             {props.user.message}
           </motion.p>
-          <div className="flex justify-center xl:hidden relative">
+          <div className="flex justify-center xl:hidden relative z-50">
             <ProjectBtn />
           </div>
           <motion.div
